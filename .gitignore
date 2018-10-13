@@ -29,6 +29,7 @@ hs_err_pid*
 *.iml
 .gradle
 /local.properties
+/.idea
 /.idea/libraries
 /.idea/modules.xml
 /.idea/workspace.xml
