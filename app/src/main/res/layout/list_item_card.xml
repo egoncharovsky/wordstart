@@ -4,14 +4,16 @@
                              xmlns:tools="http://schemas.android.com/tools"
                              android:layout_width="match_parent"
                              android:layout_height="match_parent"
-                             android:orientation="vertical">
+                             android:orientation="vertical"
+                             android:id="@+id/list_item_card"
+        >
 
     <TextView
             android:layout_width="match_parent"
-            android:layout_height="22dp"
-            android:id="@+id/word"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_item_card_word"
             tools:text="word"
-            android:textSize="14sp"
+            android:textSize="24sp"
             android:layout_marginStart="@dimen/list_item_left_margin"
             android:layout_marginBottom="@dimen/list_item_bottom_margin"
             android:layout_marginTop="@dimen/list_item_top_margin"

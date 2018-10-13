@@ -13,6 +13,13 @@ public class Word extends Entity {
         this.language = language;
     }
 
+    @Override
+    public String toString() {
+        return "Word{" +
+                "value='" + value + '\'' +
+                '}';
+    }
+
     public String getValue() {
         return value;
     }
