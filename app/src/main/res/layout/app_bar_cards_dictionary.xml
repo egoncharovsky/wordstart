@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activity.LearningCardDictionary">
+        tools:context=".ui.CardsDictionary">
 
     <android.support.design.widget.AppBarLayout
             android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_dictionary"/>
+    <include layout="@layout/content_cards_dictionary"/>
 
     <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"

@@ -13,6 +13,10 @@ public class LearningCard extends Entity {
         this.translationWord = translationWord;
     }
 
+    public LearningCard reverse() {
+        return new LearningCard(translationWord, word);
+    }
+
     public Word getWord() {
         return word;
     }
