@@ -19,12 +19,13 @@ import java.util.List;
 public class CardsDictionaryActivity extends BaseActivity {
 
     @Override
+    public int getContentViewId() {
+        return R.layout.activity_cards_dictionary;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cards_dictionary);
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         /*FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -35,17 +36,8 @@ public class CardsDictionaryActivity extends BaseActivity {
             }
         });*/
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
         LearningCardsDictionaryService cardsService = LearningCardsDictionaryService.getInstace();
         List<LearningCard> cards = cardsService.getAll();
-
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
 
         ListView cardsView = findViewById(R.id.list_cards);
         cardsView.setAdapter(createCardsAdapter(cards));
@@ -54,15 +46,13 @@ public class CardsDictionaryActivity extends BaseActivity {
 
 
     private ListAdapter createCardsAdapter(List<LearningCard> cards) {
-        final LayoutInflater inflater = LayoutInflater.from(this);
-
         return new ArrayAdapter<LearningCard>(this, R.layout.list_item_card, cards) {
 
             @NonNull
             @Override
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
                 if (convertView == null) {
-                    convertView = inflater.inflate(R.layout.list_item_card, parent, false);
+                    convertView = getLayoutInflater().inflate(R.layout.list_item_card, parent, false);
                 }
 
                 TextView textView = convertView.findViewById(R.id.list_item_card_word);
@@ -71,26 +61,6 @@ public class CardsDictionaryActivity extends BaseActivity {
                 return convertView;
             }
         };
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        boolean b = super.onNavigationItemSelected(item);
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-
-        return b;
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
     }
 
     @Override

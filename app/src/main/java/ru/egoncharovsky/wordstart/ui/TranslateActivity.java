@@ -7,8 +7,12 @@ import ru.egoncharovsky.wordstart.R;
 public class TranslateActivity extends BaseActivity {
 
     @Override
+    public int getContentViewId() {
+        return R.layout.activity_translate;
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_translate);
     }
 }
