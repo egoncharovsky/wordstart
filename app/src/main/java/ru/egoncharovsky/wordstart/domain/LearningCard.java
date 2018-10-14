@@ -8,6 +8,8 @@ public class LearningCard extends Entity {
 
     private Word translationWord;
 
+    private Translation translation;
+
     public LearningCard(Word word, Word translationWord) {
         this.word = word;
         this.translationWord = translationWord;
@@ -31,5 +33,13 @@ public class LearningCard extends Entity {
 
     public void setTranslationWord(Word translationWord) {
         this.translationWord = translationWord;
+    }
+
+    public Translation getTranslation() {
+        return translation;
+    }
+
+    public void setTranslation(Translation translation) {
+        this.translation = translation;
     }
 }

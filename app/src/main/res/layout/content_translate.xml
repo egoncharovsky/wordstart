@@ -14,11 +14,10 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:ems="10"
-            android:id="@+id/editText"
+            android:id="@+id/input_translate"
             android:hint="@string/enter_here"
             android:inputType="text|textMultiLine"
-            android:gravity="top"
-            />
+            android:gravity="top"/>
 
     <RelativeLayout
             android:layout_width="fill_parent"
@@ -38,7 +37,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/translate"/>
+                android:id="@+id/button_translate"
+                android:onClick="onTranslate"
+                />
     </RelativeLayout>
 
 </LinearLayout>
