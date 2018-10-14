@@ -38,8 +38,12 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:id="@+id/button_translate"
-                android:onClick="onTranslate"
-                />
+                android:onClick="onTranslate"/>
     </RelativeLayout>
+
+    <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/list_translation_words"/>
 
 </LinearLayout>

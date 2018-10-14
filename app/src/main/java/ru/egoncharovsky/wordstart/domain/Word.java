@@ -2,11 +2,14 @@ package ru.egoncharovsky.wordstart.domain;
 
 import ru.egoncharovsky.wordstart.domain.base.Entity;
 
+/**
+ * Immutable
+ */
 public class Word extends Entity {
 
-    private String value;
+    private final String value;
 
-    private Language language;
+    private final Language language;
 
     public Word(String value, Language language) {
         this.value = value;
@@ -24,15 +27,7 @@ public class Word extends Entity {
         return value;
     }
 
-    public void setValue(String value) {
-        this.value = value;
-    }
-
     public Language getLanguage() {
         return language;
-    }
-
-    public void setLanguage(Language language) {
-        this.language = language;
     }
 }

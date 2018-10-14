@@ -2,12 +2,10 @@
 <android.support.design.widget.NavigationView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/nav_view"
+        android:id="@+id/app_side_menu"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/app_menu_header"
-        app:menu="@menu/navigation_menu"
-        tools:showIn="@layout/activity_cards_dictionary"/>
+        app:headerLayout="@layout/app_side_menu_header"
+        app:menu="@menu/navigation_menu"/>

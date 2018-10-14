@@ -3,8 +3,14 @@ package ru.egoncharovsky.wordstart.ui;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.*;
-import android.widget.*;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 import ru.egoncharovsky.wordstart.R;
 import ru.egoncharovsky.wordstart.domain.LearningCard;
 import ru.egoncharovsky.wordstart.domain.service.LearningCardsDictionaryService;
@@ -12,6 +18,10 @@ import ru.egoncharovsky.wordstart.domain.service.LearningCardsDictionaryService;
 import java.util.List;
 
 public class CardsDictionaryActivity extends BaseActivity {
+
+    private LearningCardsDictionaryService cardsService;
+
+    private ListView listCards;
 
     @Override
     public int getActivityViewId() {
@@ -22,6 +32,9 @@ public class CardsDictionaryActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        cardsService = LearningCardsDictionaryService.getInstace();
+        listCards = findViewById(R.id.list_cards);
+
         /*FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,31 +44,7 @@ public class CardsDictionaryActivity extends BaseActivity {
             }
         });*/
 
-        LearningCardsDictionaryService cardsService = LearningCardsDictionaryService.getInstace();
-        List<LearningCard> cards = cardsService.getAll();
-
-        ListView cardsView = findViewById(R.id.list_cards);
-        cardsView.setAdapter(createCardsAdapter(cards));
-    }
-
-
-
-    private ListAdapter createCardsAdapter(List<LearningCard> cards) {
-        return new ArrayAdapter<LearningCard>(this, R.layout.list_item_card, cards) {
-
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                if (convertView == null) {
-                    convertView = getLayoutInflater().inflate(R.layout.list_item_card, parent, false);
-                }
-
-                TextView textView = convertView.findViewById(R.id.list_item_card_word);
-                textView.setText(getItem(position).getWord().getValue()+ " - " + getItem(position).getTranslationWord().getValue());
-
-                return convertView;
-            }
-        };
+        listCards.setAdapter(cardsAdapter(cardsService.getAll()));
     }
 
     @Override
@@ -80,4 +69,21 @@ public class CardsDictionaryActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private ListAdapter cardsAdapter(List<LearningCard> cards) {
+        return new ArrayAdapter<LearningCard>(this, R.layout.list_item_card, cards) {
+
+            @NonNull
+            @Override
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                if (convertView == null) {
+                    convertView = getLayoutInflater().inflate(R.layout.list_item_card, parent, false);
+                }
+
+                TextView textView = convertView.findViewById(R.id.list_item_card_word);
+                textView.setText(getItem(position).getWord().getValue() + " - " + getItem(position).getTranslationWord().getValue());
+
+                return convertView;
+            }
+        };
+    }
 }

@@ -4,9 +4,9 @@ import ru.egoncharovsky.wordstart.domain.base.Entity;
 
 public class LearningCard extends Entity {
 
-    private Word word;
+    private final Word word;
 
-    private Word translationWord;
+    private final Word translationWord;
 
     private Translation translation;
 
@@ -23,16 +23,8 @@ public class LearningCard extends Entity {
         return word;
     }
 
-    public void setWord(Word word) {
-        this.word = word;
-    }
-
     public Word getTranslationWord() {
         return translationWord;
-    }
-
-    public void setTranslationWord(Word translationWord) {
-        this.translationWord = translationWord;
     }
 
     public Translation getTranslation() {

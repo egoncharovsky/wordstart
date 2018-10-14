@@ -23,10 +23,10 @@ public abstract class BaseActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(getActivityViewId());
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar_top);
         setSupportActionBar(toolbar);
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.app_side_menu);
         navigationView.setNavigationItemSelectedListener(this);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
