@@ -8,5 +8,7 @@
     <string name="action_settings" translatable="false">Settings</string>
 
     <string name="cards_dictionary" translatable="true">Cards</string>
+    <string name="translator" translatable="true">Translate</string>
     <string name="translate" translatable="true">Translate</string>
+    <string name="enter_here">Enter here...</string>
 </resources>

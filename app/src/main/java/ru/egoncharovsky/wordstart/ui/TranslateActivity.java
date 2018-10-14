@@ -7,7 +7,7 @@ import ru.egoncharovsky.wordstart.R;
 public class TranslateActivity extends BaseActivity {
 
     @Override
-    public int getContentViewId() {
+    public int getActivityViewId() {
         return R.layout.activity_translate;
     }
 
