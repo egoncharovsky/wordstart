@@ -10,8 +10,8 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.Light">
         <activity
-                android:name=".ui.CardsDictionary"
-                android:label="@string/app_name"
+                android:name=".ui.CardsDictionaryActivity"
+                android:label="@string/cards_dictionary"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -19,6 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".ui.TranslateActivity"/>
     </application>
 
 </manifest>

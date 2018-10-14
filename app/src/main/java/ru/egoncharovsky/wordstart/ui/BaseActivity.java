@@ -14,6 +14,12 @@ public abstract class BaseActivity extends AppCompatActivity
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+//        Locale locale = new Locale("ru");
+//        Locale.setDefault(locale);
+//        Configuration config = getBaseContext().getResources().getConfiguration();
+//        config.locale = locale;
+//        getBaseContext().getResources().updateConfiguration(config,
+//                getBaseContext().getResources().getDisplayMetrics());
     }
 
     @Override

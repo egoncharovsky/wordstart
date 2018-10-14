@@ -16,7 +16,7 @@ import ru.egoncharovsky.wordstart.domain.service.LearningCardsDictionaryService;
 
 import java.util.List;
 
-public class CardsDictionary extends BaseActivity {
+public class CardsDictionaryActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +44,14 @@ public class CardsDictionary extends BaseActivity {
         LearningCardsDictionaryService cardsService = LearningCardsDictionaryService.getInstace();
         List<LearningCard> cards = cardsService.getAll();
 
-        ListView cardsView = findViewById(R.id.list_cards);
-        cardsView.setAdapter(createCardsAdapter(cards));
-
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        ListView cardsView = findViewById(R.id.list_cards);
+        cardsView.setAdapter(createCardsAdapter(cards));
     }
+
+
 
     private ListAdapter createCardsAdapter(List<LearningCard> cards) {
         final LayoutInflater inflater = LayoutInflater.from(this);
