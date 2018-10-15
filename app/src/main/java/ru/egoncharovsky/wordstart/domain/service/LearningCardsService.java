@@ -2,23 +2,24 @@ package ru.egoncharovsky.wordstart.domain.service;
 
 import ru.egoncharovsky.wordstart.domain.Language;
 import ru.egoncharovsky.wordstart.domain.LearningCard;
+import ru.egoncharovsky.wordstart.domain.Translation;
 import ru.egoncharovsky.wordstart.domain.Word;
 
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class LearningCardsDictionaryService {
+public class LearningCardsService {
 
-    private static LearningCardsDictionaryService instance;
+    private static LearningCardsService instance;
 
-    private LearningCardsDictionaryService() {
+    private LearningCardsService() {
 
     }
 
-    public static LearningCardsDictionaryService getInstace() {
+    public static LearningCardsService getInstance() {
         if (instance == null) {
-            instance = new LearningCardsDictionaryService();
+            instance = new LearningCardsService();
         }
         return instance;
     }
@@ -37,4 +38,15 @@ public class LearningCardsDictionaryService {
         return cards;
     }
 
+    public List<LearningCard> getCardsFor(Translation translation) {
+        if (!translation.getTranslationWords().isEmpty()) {
+            final Word word = translation.getWord();
+            final Word translationWord = translation.getTranslationWords().get(0);
+
+            return new LinkedList<LearningCard>() {{
+                add(new LearningCard(word, translationWord));
+            }};
+        }
+        return Collections.emptyList();
+    }
 }

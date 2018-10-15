@@ -1,5 +1,7 @@
 package ru.egoncharovsky.wordstart.domain.base;
 
+import java.util.Objects;
+
 public abstract class Entity implements Identifieble {
 
     private Long id;
@@ -11,5 +13,18 @@ public abstract class Entity implements Identifieble {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Entity entity = (Entity) o;
+        return Objects.equals(getId(), entity.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }

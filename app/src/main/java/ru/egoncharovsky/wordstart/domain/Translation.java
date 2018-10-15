@@ -20,6 +20,7 @@ public class Translation extends Entity {
 
         this.word = word;
         this.translationLanguage = toLanguage;
+        translationWords = new LinkedList<>();
     }
 
     public Word getWord() {
@@ -34,10 +35,6 @@ public class Translation extends Entity {
         if (translation.getLanguage() != translationLanguage) {
             throw new IllegalArgumentException("Expect word language is " +
                     translationLanguage + " but match " + translation.getLanguage());
-        }
-
-        if (translationWords == null) {
-            translationWords = new LinkedList<>();
         }
 
         translationWords.add(translation);
