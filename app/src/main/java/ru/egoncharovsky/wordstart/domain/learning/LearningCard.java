@@ -1,6 +1,8 @@
-package ru.egoncharovsky.wordstart.domain;
+package ru.egoncharovsky.wordstart.domain.learning;
 
-import ru.egoncharovsky.wordstart.domain.base.Entity;
+import ru.egoncharovsky.wordstart.domain.Entity;
+import ru.egoncharovsky.wordstart.domain.word.Translation;
+import ru.egoncharovsky.wordstart.domain.word.Word;
 
 public class LearningCard extends Entity {
 

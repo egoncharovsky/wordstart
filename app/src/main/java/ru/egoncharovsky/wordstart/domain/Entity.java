@@ -1,4 +1,4 @@
-package ru.egoncharovsky.wordstart.domain.base;
+package ru.egoncharovsky.wordstart.domain;
 
 import java.util.Objects;
 

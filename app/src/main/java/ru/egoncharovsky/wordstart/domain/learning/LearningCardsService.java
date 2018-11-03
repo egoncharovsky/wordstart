@@ -1,9 +1,8 @@
-package ru.egoncharovsky.wordstart.domain.service;
+package ru.egoncharovsky.wordstart.domain.learning;
 
-import ru.egoncharovsky.wordstart.domain.Language;
-import ru.egoncharovsky.wordstart.domain.LearningCard;
-import ru.egoncharovsky.wordstart.domain.Translation;
-import ru.egoncharovsky.wordstart.domain.Word;
+import ru.egoncharovsky.wordstart.domain.word.Language;
+import ru.egoncharovsky.wordstart.domain.word.Translation;
+import ru.egoncharovsky.wordstart.domain.word.Word;
 
 import java.util.Collections;
 import java.util.LinkedList;

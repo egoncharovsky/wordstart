@@ -12,8 +12,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import ru.egoncharovsky.wordstart.R;
-import ru.egoncharovsky.wordstart.domain.LearningCard;
-import ru.egoncharovsky.wordstart.domain.service.LearningCardsService;
+import ru.egoncharovsky.wordstart.domain.learning.LearningCard;
+import ru.egoncharovsky.wordstart.domain.learning.LearningCardsService;
 
 import java.util.List;
 

@@ -8,12 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import ru.egoncharovsky.wordstart.R;
-import ru.egoncharovsky.wordstart.domain.Language;
-import ru.egoncharovsky.wordstart.domain.LearningCard;
-import ru.egoncharovsky.wordstart.domain.Translation;
-import ru.egoncharovsky.wordstart.domain.Word;
-import ru.egoncharovsky.wordstart.domain.service.LearningCardsService;
-import ru.egoncharovsky.wordstart.domain.service.TranslationService;
+import ru.egoncharovsky.wordstart.domain.learning.LearningCard;
+import ru.egoncharovsky.wordstart.domain.learning.LearningCardsService;
+import ru.egoncharovsky.wordstart.domain.word.Language;
+import ru.egoncharovsky.wordstart.domain.word.Translation;
+import ru.egoncharovsky.wordstart.domain.word.TranslationService;
+import ru.egoncharovsky.wordstart.domain.word.Word;
 
 import java.util.HashSet;
 import java.util.List;

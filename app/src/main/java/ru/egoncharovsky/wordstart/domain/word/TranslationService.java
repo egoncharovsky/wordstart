@@ -1,8 +1,4 @@
-package ru.egoncharovsky.wordstart.domain.service;
-
-import ru.egoncharovsky.wordstart.domain.Language;
-import ru.egoncharovsky.wordstart.domain.Translation;
-import ru.egoncharovsky.wordstart.domain.Word;
+package ru.egoncharovsky.wordstart.domain.word;
 
 public class TranslationService {
 

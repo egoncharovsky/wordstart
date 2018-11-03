@@ -1,6 +1,6 @@
-package ru.egoncharovsky.wordstart.domain;
+package ru.egoncharovsky.wordstart.domain.word;
 
-import ru.egoncharovsky.wordstart.domain.base.Entity;
+import ru.egoncharovsky.wordstart.domain.Entity;
 
 /**
  * Immutable
