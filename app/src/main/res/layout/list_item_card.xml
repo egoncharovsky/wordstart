@@ -4,13 +4,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/list_item_card_word"
-            android:textSize="24sp"
-            android:layout_marginStart="@dimen/list_item_left_margin"
-            android:layout_marginBottom="@dimen/list_item_bottom_margin"
-            android:layout_marginTop="@dimen/list_item_top_margin"/>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="fill_parent"
+                    android:layout_height="90dp"
+                    android:padding="6dp">
+
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/list_item_card_main_text"
+                android:textSize="30sp"/>
+
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/list_item_card_main_text"
+                android:ellipsize="marquee"
+                android:lines="2"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:id="@+id/list_item_card_sub_text"
+                android:textSize="24sp"/>
+
+    </RelativeLayout>
+
+
 
 </android.support.constraint.ConstraintLayout>

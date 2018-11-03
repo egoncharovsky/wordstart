@@ -24,7 +24,7 @@ public class TranslateActivity extends BaseActivity {
     private LearningCardsService cardsService = new LearningCardsService(new LearningCardRepositoryImpl());
 
     private TranslateView translateView;
-    private TranslateModel model;
+    private Model model;
 
     @Override
     public int getActivityViewId() {
@@ -36,7 +36,7 @@ public class TranslateActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         translateView = new TranslateView();
-        model = new TranslateModel(Language.RU, Language.EN);
+        model = new Model(Language.RU, Language.EN);
     }
 
     public void onTranslate(View view) {
@@ -47,13 +47,13 @@ public class TranslateActivity extends BaseActivity {
             Translation translation = translationService.translate(word, model.getTo());
             Set<LearningCard> cards = new HashSet<>(cardsService.getCardsFor(translation));
 
-            model = new TranslateModel(translation, cards);
+            model = new Model(translation, cards);
             translateView.update(model);
         }
     }
 
     public void onCreateCard(View view) {
-        TranslateModel.TranslationItem item = translateView.getClickedItem(view);
+        Model.TranslationItem item = translateView.getClickedItem(view);
 
         LearningCard card = item.toCard();
         translateView.update(model);
@@ -61,7 +61,7 @@ public class TranslateActivity extends BaseActivity {
         cardsService.save(card);
     }
 
-    private class TranslateModel {
+    private class Model {
         private final Language from;
         private final Language to;
 
@@ -69,14 +69,14 @@ public class TranslateActivity extends BaseActivity {
 
         private Word translatedWord;
 
-        public TranslateModel(Language from, Language to) {
+        public Model(Language from, Language to) {
             this.from = from;
             this.to = to;
 
             items = Collections.emptySet();
         }
 
-        public TranslateModel(Translation translation, Collection<LearningCard> cards) {
+        public Model(Translation translation, Collection<LearningCard> cards) {
             from = translation.getOriginalLanguage();
             to = translation.getTranslationLanguage();
 
@@ -155,14 +155,14 @@ public class TranslateActivity extends BaseActivity {
 
         private ListView listTranslation;
 
-        private HashMap<ImageButton, TranslateModel.TranslationItem> buttonItemMap;
+        private HashMap<ImageButton, Model.TranslationItem> buttonItemMap;
 
         public TranslateView() {
             inputTranslate = findViewById(R.id.input_translate);
             listTranslation = findViewById(R.id.list_translation_words);
         }
 
-        public void update(TranslateModel model) {
+        public void update(Model model) {
             buttonItemMap = new HashMap<>();
 
             inputTranslate.setText(model.getTranslatedText());
@@ -177,13 +177,13 @@ public class TranslateActivity extends BaseActivity {
             return "";
         }
 
-        public TranslateModel.TranslationItem getClickedItem(View buttonView) {
+        public Model.TranslationItem getClickedItem(View buttonView) {
             ImageButton button = buttonView.findViewById(R.id.button_create_card);
             return buttonItemMap.get(button);
         }
 
-        private ListAdapter translationWordsAdapter(Set<TranslateModel.TranslationItem> items) {
-            return new ArrayAdapter<TranslateModel.TranslationItem>(
+        private ListAdapter translationWordsAdapter(Set<Model.TranslationItem> items) {
+            return new ArrayAdapter<Model.TranslationItem>(
                     TranslateActivity.this,
                     R.layout.list_item_translation_word,
                     new ArrayList<>(items)) {
@@ -194,7 +194,7 @@ public class TranslateActivity extends BaseActivity {
                     if (convertView == null) {
                         convertView = getLayoutInflater().inflate(R.layout.list_item_translation_word, parent, false);
                     }
-                    TranslateModel.TranslationItem item = getItem(position);
+                    Model.TranslationItem item = getItem(position);
 
                     TextView textView = convertView.findViewById(R.id.list_item_translation_word);
                     textView.setText(Objects.requireNonNull(item).getWord());

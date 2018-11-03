@@ -15,25 +15,22 @@ import java.util.Map;
 public class LearningCardRepositoryImpl implements LearningCardRepository {
 
     @SuppressLint("UseSparseArrays")
-    private static Map<Long, LearningCard> data = new HashMap<Long, LearningCard>() {{
+    private static Map<Long, LearningCard> data = new HashMap<Long, LearningCard>();
+    static {
         LearningCard card = new LearningCard(
                 new Word("word", Language.EN),
-                new Word("слово", Language.EN));
+                new Word("слово", Language.RU));
         insertStatic(card);
-    }};
-    private static long idGenerator = 0;
+    }
 
     private static LearningCard insertStatic(LearningCard item) {
-        item.setId(idGenerator++);
+        item.setId((long) (data.size() + 1));
         data.put(item.getId(), item);
         return item;
     }
 
     @Override
     public LearningCard insert(LearningCard item) {
-//        item.setId(idGenerator++);
-//        data.put(item.getId(), item);
-//        return item;
         return insertStatic(item);
     }
 

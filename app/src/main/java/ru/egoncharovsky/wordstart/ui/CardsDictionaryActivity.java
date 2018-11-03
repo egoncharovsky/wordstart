@@ -16,13 +16,17 @@ import ru.egoncharovsky.wordstart.domain.learning.LearningCard;
 import ru.egoncharovsky.wordstart.domain.learning.LearningCardsService;
 import ru.egoncharovsky.wordstart.repository.LearningCardRepositoryImpl;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 public class CardsDictionaryActivity extends BaseActivity {
 
     private LearningCardsService cardsService = new LearningCardsService(new LearningCardRepositoryImpl());
 
-    private ListView listCards;
+    private CardsDictionaryView cardsDictionaryView;
+    private Model model;
 
     @Override
     public int getActivityViewId() {
@@ -33,18 +37,10 @@ public class CardsDictionaryActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        listCards = findViewById(R.id.list_cards);
+        cardsDictionaryView = new CardsDictionaryView();
+        model = new Model(cardsService.getAll());
 
-        /*FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-
-        listCards.setAdapter(cardsAdapter(cardsService.getAll()));
+        cardsDictionaryView.update(model);
     }
 
     @Override
@@ -69,8 +65,60 @@ public class CardsDictionaryActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private ListAdapter cardsAdapter(List<LearningCard> cards) {
-        return new ArrayAdapter<LearningCard>(this, R.layout.list_item_card, cards) {
+    private class Model {
+        private final List<CardItem> cards = new LinkedList<>();
+
+        private Model(List<LearningCard> cards) {
+            for (LearningCard card : cards) {
+                this.cards.add(new CardItem(card));
+            }
+        }
+
+        public List<CardItem> getCards() {
+            return new ArrayList<>(cards);
+        }
+
+        private class CardItem {
+            private final LearningCard card;
+
+            private CardItem(LearningCard card) {
+                this.card = card;
+            }
+
+            public String getText() {
+                return card.getOriginalWord().getValue();
+            }
+
+            public String getSubText() {
+                return card.getTranslationWord().getValue();
+            }
+        }
+    }
+
+    private class CardsDictionaryView {
+
+        private final ListView listCards;
+
+        public CardsDictionaryView() {
+            listCards = findViewById(R.id.list_cards);
+
+            /*FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });*/
+        }
+
+        public void update(Model model) {
+            listCards.setAdapter(cardsAdapter(model.getCards()));
+        }
+    }
+
+    private ListAdapter cardsAdapter(List<Model.CardItem> cards) {
+        return new ArrayAdapter<Model.CardItem>(this, R.layout.list_item_card, cards) {
 
             @NonNull
             @Override
@@ -78,9 +126,13 @@ public class CardsDictionaryActivity extends BaseActivity {
                 if (convertView == null) {
                     convertView = getLayoutInflater().inflate(R.layout.list_item_card, parent, false);
                 }
+                Model.CardItem item = getItem(position);
 
-                TextView textView = convertView.findViewById(R.id.list_item_card_word);
-                textView.setText(getItem(position).getOriginalWord().getValue() + " - " + getItem(position).getTranslationWord().getValue());
+                TextView mainText = convertView.findViewById(R.id.list_item_card_main_text);
+                mainText.setText(Objects.requireNonNull(item).getText());
+
+                TextView subText = convertView.findViewById(R.id.list_item_card_sub_text);
+                subText.setText(Objects.requireNonNull(item).getSubText());
 
                 return convertView;
             }
