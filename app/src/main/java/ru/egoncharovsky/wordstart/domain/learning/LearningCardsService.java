@@ -38,14 +38,20 @@ public class LearningCardsService {
     }
 
     public List<LearningCard> getCardsFor(Translation translation) {
-        if (!translation.getTranslationWords().isEmpty()) {
-            final Word word = translation.getWord();
-            final Word translationWord = translation.getTranslationWords().get(0);
+        if (!translation.getTranslationVariants().isEmpty()) {
+            final Word word = translation.getOriginalWord();
+            final Word translationWord = translation.getTranslationVariants().get(0).getWord();
 
             return new LinkedList<LearningCard>() {{
                 add(new LearningCard(word, translationWord));
             }};
         }
         return Collections.emptyList();
+    }
+
+    public LearningCard create(LearningCard card) {
+
+
+        return null;
     }
 }

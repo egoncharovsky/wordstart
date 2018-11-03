@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".ui.TranslateActivity"
+        tools:context=".ui.translate.TranslateActivity"
         android:orientation="vertical">
 
 
@@ -38,7 +38,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:id="@+id/button_translate"
-                android:onClick="onTranslate"/>
+                android:onClick="onTranslate"
+                android:height="30dp"
+                android:textSize="18sp"/>
     </RelativeLayout>
 
     <ListView

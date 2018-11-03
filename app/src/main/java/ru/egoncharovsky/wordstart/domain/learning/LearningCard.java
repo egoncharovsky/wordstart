@@ -6,27 +6,31 @@ import ru.egoncharovsky.wordstart.domain.word.Word;
 
 public class LearningCard extends Entity {
 
-    private final Word word;
+    private final Word originalWord;
 
     private final Word translationWord;
 
     private Translation translation;
 
-    public LearningCard(Word word, Word translationWord) {
-        this.word = word;
+    public LearningCard(Word originalWord, Word translationWord) {
+        this.originalWord = originalWord;
         this.translationWord = translationWord;
     }
 
     public LearningCard reverse() {
-        return new LearningCard(translationWord, word);
+        return new LearningCard(translationWord, originalWord);
     }
 
-    public Word getWord() {
-        return word;
+    public Word getOriginalWord() {
+        return originalWord;
     }
 
     public Word getTranslationWord() {
         return translationWord;
+    }
+
+    public boolean hasTranslationVariant(Translation.Variant variant) {
+        return translationWord.equals(variant.getWord());
     }
 
     public Translation getTranslation() {

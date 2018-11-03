@@ -17,9 +17,9 @@ public class TranslationService {
 
     public Translation translate(Word word, final Language toLanguage) {
         return new Translation(word, toLanguage) {{
-            addTranslationWord(new Word("переведено 1", toLanguage));
-            addTranslationWord(new Word("переведено 2", toLanguage));
-            addTranslationWord(new Word("переведено 3", toLanguage));
+            addVariant(this.new Variant(new Word("переведено 1", toLanguage)));
+            addVariant(this.new Variant(new Word("переведено 2", toLanguage)));
+            addVariant(this.new Variant(new Word("переведено 3", toLanguage)));
         }};
     }
 }

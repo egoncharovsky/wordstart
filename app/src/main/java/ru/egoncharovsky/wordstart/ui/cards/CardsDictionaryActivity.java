@@ -1,4 +1,4 @@
-package ru.egoncharovsky.wordstart.ui;
+package ru.egoncharovsky.wordstart.ui.cards;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +14,7 @@ import android.widget.TextView;
 import ru.egoncharovsky.wordstart.R;
 import ru.egoncharovsky.wordstart.domain.learning.LearningCard;
 import ru.egoncharovsky.wordstart.domain.learning.LearningCardsService;
+import ru.egoncharovsky.wordstart.ui.BaseActivity;
 
 import java.util.List;
 
@@ -80,7 +81,7 @@ public class CardsDictionaryActivity extends BaseActivity {
                 }
 
                 TextView textView = convertView.findViewById(R.id.list_item_card_word);
-                textView.setText(getItem(position).getWord().getValue() + " - " + getItem(position).getTranslationWord().getValue());
+                textView.setText(getItem(position).getOriginalWord().getValue() + " - " + getItem(position).getTranslationWord().getValue());
 
                 return convertView;
             }
