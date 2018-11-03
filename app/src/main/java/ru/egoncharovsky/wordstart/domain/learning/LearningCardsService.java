@@ -49,9 +49,7 @@ public class LearningCardsService {
         return Collections.emptyList();
     }
 
-    public LearningCard create(LearningCard card) {
-
-
-        return null;
+    public LearningCard save(LearningCard card) {
+        return card;
     }
 }

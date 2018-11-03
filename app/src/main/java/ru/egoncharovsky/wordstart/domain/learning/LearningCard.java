@@ -29,9 +29,9 @@ public class LearningCard extends Entity {
         return translationWord;
     }
 
-    public boolean hasTranslationVariant(Translation.Variant variant) {
-        return translationWord.equals(variant.getWord());
-    }
+//    public boolean hasTranslationVariant(Translation.Variant variant) {
+//        return translationWord.equals(variant.getWord());
+//    }
 
     public Translation getTranslation() {
         return translation;

@@ -1,4 +1,4 @@
-package ru.egoncharovsky.wordstart.ui.translate;
+package ru.egoncharovsky.wordstart.ui;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,15 +14,13 @@ import ru.egoncharovsky.wordstart.domain.word.Language;
 import ru.egoncharovsky.wordstart.domain.word.Translation;
 import ru.egoncharovsky.wordstart.domain.word.TranslationService;
 import ru.egoncharovsky.wordstart.domain.word.Word;
-import ru.egoncharovsky.wordstart.ui.BaseActivity;
 
 import java.util.*;
 
 public class TranslateActivity extends BaseActivity {
 
-    private TranslationService translationService;
-
-    private LearningCardsService cardsService;
+    private TranslationService translationService = TranslationService.getInstace();
+    private LearningCardsService cardsService = LearningCardsService.getInstance();
 
     private TranslateView translateView;
     private TranslateModel model;
@@ -35,9 +33,6 @@ public class TranslateActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        translationService = TranslationService.getInstace();
-        cardsService = LearningCardsService.getInstance();
 
         translateView = new TranslateView();
         model = new TranslateModel(Language.RU, Language.EN);
@@ -59,22 +54,24 @@ public class TranslateActivity extends BaseActivity {
     public void onCreateCard(View view) {
         TranslateModel.TranslationItem item = translateView.getClickedItem(view);
 
-        item.setMarked(true);
+        LearningCard card = item.toCard();
         translateView.update(model);
+
+        cardsService.save(card);
     }
 
     private class TranslateModel {
         private final Language from;
         private final Language to;
 
-        private final String translatedText;
         private final Set<TranslationItem> items;
+
+        private Word translatedWord;
 
         public TranslateModel(Language from, Language to) {
             this.from = from;
             this.to = to;
 
-            translatedText = "";
             items = Collections.emptySet();
         }
 
@@ -82,7 +79,7 @@ public class TranslateActivity extends BaseActivity {
             from = translation.getOriginalLanguage();
             to = translation.getTranslationLanguage();
 
-            translatedText = translation.getOriginalWord().getValue();
+            translatedWord = translation.getOriginalWord();
 
             items = new LinkedHashSet<>();
             for (Translation.Variant variant : translation.getTranslationVariants()) {
@@ -90,9 +87,7 @@ public class TranslateActivity extends BaseActivity {
 
                 if (cards != null) {
                     for (LearningCard card : cards) {
-                        if (card.hasTranslationVariant(variant)) {
-                            item.setMarked(true);
-                        }
+                        item.markIfRepresents(card);
                     }
                 }
 
@@ -109,7 +104,7 @@ public class TranslateActivity extends BaseActivity {
         }
 
         public String getTranslatedText() {
-            return translatedText;
+            return translatedWord != null ? translatedWord.getValue() : "";
         }
 
         public Set<TranslationItem> getItems() {
@@ -117,30 +112,37 @@ public class TranslateActivity extends BaseActivity {
         }
 
         private class TranslationItem {
-            private final String word;
+            private final Word word;
             private boolean marked;
 
             public TranslationItem(Translation.Variant variant) {
-                this.word = variant.getWord().getValue();
+                this.word = variant.getWord();
                 marked = false;
             }
 
             public String getWord() {
-                return word;
+                return word.getValue();
+            }
+
+            public void markIfRepresents(LearningCard card) {
+                if (word.equals(card.getTranslationWord())) {
+                    marked = true;
+                }
+            }
+
+            public LearningCard toCard() {
+                marked = true;
+                return new LearningCard(translatedWord, word);
             }
 
             public boolean isMarked() {
                 return marked;
             }
 
-            public void setMarked(boolean marked) {
-                this.marked = marked;
-            }
-
             @Override
             public String toString() {
                 return "TranslationItem{" +
-                        "word='" + word + '\'' +
+                        "word='" + word.getValue() + '\'' +
                         ", marked=" + marked +
                         '}';
             }
@@ -210,6 +212,4 @@ public class TranslateActivity extends BaseActivity {
             };
         }
     }
-
-
 }

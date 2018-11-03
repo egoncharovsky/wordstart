@@ -1,4 +1,4 @@
-package ru.egoncharovsky.wordstart.ui.cards;
+package ru.egoncharovsky.wordstart.ui;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,7 +14,6 @@ import android.widget.TextView;
 import ru.egoncharovsky.wordstart.R;
 import ru.egoncharovsky.wordstart.domain.learning.LearningCard;
 import ru.egoncharovsky.wordstart.domain.learning.LearningCardsService;
-import ru.egoncharovsky.wordstart.ui.BaseActivity;
 
 import java.util.List;
 

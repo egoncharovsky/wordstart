@@ -10,7 +10,7 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.Light">
         <activity
-                android:name=".ui.cards.CardsDictionaryActivity"
+                android:name=".ui.CardsDictionaryActivity"
                 android:label="@string/cards_dictionary"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.translate.TranslateActivity"
+        <activity android:name=".ui.TranslateActivity"
                   android:label="@string/translator"
                   android:theme="@style/AppTheme.NoActionBar"/>
     </application>
