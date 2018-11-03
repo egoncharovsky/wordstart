@@ -155,7 +155,7 @@ public class TranslateActivity extends BaseActivity {
 
         private ListView listTranslation;
 
-        private HashMap<ImageButton, Model.TranslationItem> buttonItemMap;
+        private HashMap<ImageView, Model.TranslationItem> buttonItemMap;
 
         public TranslateView() {
             inputTranslate = findViewById(R.id.input_translate);
@@ -178,7 +178,7 @@ public class TranslateActivity extends BaseActivity {
         }
 
         public Model.TranslationItem getClickedItem(View buttonView) {
-            ImageButton button = buttonView.findViewById(R.id.button_create_card);
+            ImageView button = buttonView.findViewById(R.id.button_create_card);
             return buttonItemMap.get(button);
         }
 
@@ -199,7 +199,7 @@ public class TranslateActivity extends BaseActivity {
                     TextView textView = convertView.findViewById(R.id.list_item_translation_word);
                     textView.setText(Objects.requireNonNull(item).getWord());
 
-                    ImageButton button = convertView.findViewById(R.id.button_create_card);
+                    ImageView button = convertView.findViewById(R.id.button_create_card);
                     if (item.isMarked()) {
                         button.setClickable(false);
                         button.setImageResource(R.drawable.baseline_done_black_18dp);
