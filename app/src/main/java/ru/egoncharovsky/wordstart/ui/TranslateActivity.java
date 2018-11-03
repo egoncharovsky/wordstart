@@ -14,13 +14,14 @@ import ru.egoncharovsky.wordstart.domain.word.Language;
 import ru.egoncharovsky.wordstart.domain.word.Translation;
 import ru.egoncharovsky.wordstart.domain.word.TranslationService;
 import ru.egoncharovsky.wordstart.domain.word.Word;
+import ru.egoncharovsky.wordstart.repository.LearningCardRepositoryImpl;
 
 import java.util.*;
 
 public class TranslateActivity extends BaseActivity {
 
-    private TranslationService translationService = TranslationService.getInstace();
-    private LearningCardsService cardsService = LearningCardsService.getInstance();
+    private TranslationService translationService = new TranslationService();
+    private LearningCardsService cardsService = new LearningCardsService(new LearningCardRepositoryImpl());
 
     private TranslateView translateView;
     private TranslateModel model;

@@ -1,6 +1,6 @@
 package ru.egoncharovsky.wordstart.domain;
 
-public interface Identifieble {
+public interface Identifiable {
 
     Long getId();
 }

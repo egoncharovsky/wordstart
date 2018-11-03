@@ -10,8 +10,6 @@ public class LearningCard extends Entity {
 
     private final Word translationWord;
 
-    private Translation translation;
-
     public LearningCard(Word originalWord, Word translationWord) {
         this.originalWord = originalWord;
         this.translationWord = translationWord;
@@ -29,15 +27,8 @@ public class LearningCard extends Entity {
         return translationWord;
     }
 
-//    public boolean hasTranslationVariant(Translation.Variant variant) {
-//        return translationWord.equals(variant.getWord());
-//    }
-
-    public Translation getTranslation() {
-        return translation;
-    }
-
-    public void setTranslation(Translation translation) {
-        this.translation = translation;
+    public boolean containedInTranslation(Translation translation) {
+        return translation.getOriginalWord().equals(originalWord)
+                && translation.variantsContainsWord(translationWord);
     }
 }

@@ -45,6 +45,13 @@ public class Translation extends Entity {
         return translationLanguage;
     }
 
+    public boolean variantsContainsWord(Word word) {
+        for (Variant variant : translationVariants) {
+            if (variant.getWord().equals(word)) return true;
+        }
+        return false;
+    }
+
     public class Variant {
         private Word word;
 

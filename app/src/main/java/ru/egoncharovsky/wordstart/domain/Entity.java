@@ -2,7 +2,7 @@ package ru.egoncharovsky.wordstart.domain;
 
 import java.util.Objects;
 
-public abstract class Entity implements Identifieble {
+public abstract class Entity implements Identifiable {
 
     private Long id;
 

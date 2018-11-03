@@ -1,55 +1,26 @@
 package ru.egoncharovsky.wordstart.domain.learning;
 
-import ru.egoncharovsky.wordstart.domain.word.Language;
 import ru.egoncharovsky.wordstart.domain.word.Translation;
-import ru.egoncharovsky.wordstart.domain.word.Word;
 
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 public class LearningCardsService {
 
-    private static LearningCardsService instance;
+    private LearningCardRepository repository;
 
-    private LearningCardsService() {
-
-    }
-
-    public static LearningCardsService getInstance() {
-        if (instance == null) {
-            instance = new LearningCardsService();
-        }
-        return instance;
+    public LearningCardsService(LearningCardRepository repository) {
+        this.repository = repository;
     }
 
     public List<LearningCard> getAll() {
-        Word word1 = new Word("слово", Language.RU);
-        Word word2 = new Word("word", Language.EN);
-
-        final LearningCard card = new LearningCard(word1, word2);
-
-        List<LearningCard> cards = new LinkedList<LearningCard>() {{
-            add(card);
-            add(card.reverse());
-        }};
-
-        return cards;
+        return repository.getAll();
     }
 
     public List<LearningCard> getCardsFor(Translation translation) {
-        if (!translation.getTranslationVariants().isEmpty()) {
-            final Word word = translation.getOriginalWord();
-            final Word translationWord = translation.getTranslationVariants().get(0).getWord();
-
-            return new LinkedList<LearningCard>() {{
-                add(new LearningCard(word, translationWord));
-            }};
-        }
-        return Collections.emptyList();
+        return repository.findCardsFor(translation);
     }
 
     public LearningCard save(LearningCard card) {
-        return card;
+        return repository.insert(card);
     }
 }

@@ -14,12 +14,13 @@ import android.widget.TextView;
 import ru.egoncharovsky.wordstart.R;
 import ru.egoncharovsky.wordstart.domain.learning.LearningCard;
 import ru.egoncharovsky.wordstart.domain.learning.LearningCardsService;
+import ru.egoncharovsky.wordstart.repository.LearningCardRepositoryImpl;
 
 import java.util.List;
 
 public class CardsDictionaryActivity extends BaseActivity {
 
-    private LearningCardsService cardsService;
+    private LearningCardsService cardsService = new LearningCardsService(new LearningCardRepositoryImpl());
 
     private ListView listCards;
 
@@ -32,7 +33,6 @@ public class CardsDictionaryActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        cardsService = LearningCardsService.getInstance();
         listCards = findViewById(R.id.list_cards);
 
         /*FloatingActionButton fab = findViewById(R.id.fab);
