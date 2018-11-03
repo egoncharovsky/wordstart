@@ -7,19 +7,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 import ru.egoncharovsky.wordstart.R;
 import ru.egoncharovsky.wordstart.domain.learning.LearningCard;
 import ru.egoncharovsky.wordstart.domain.learning.LearningCardsService;
 import ru.egoncharovsky.wordstart.repository.LearningCardRepositoryImpl;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class CardsDictionaryActivity extends BaseActivity {
 
@@ -39,6 +33,12 @@ public class CardsDictionaryActivity extends BaseActivity {
 
         cardsDictionaryView = new CardsDictionaryView();
         model = new Model(cardsService.getAll());
+
+        cardsDictionaryView.update(model);
+    }
+
+    public void onToggleSelect(Model.CardItem item) {
+        model.toggleSelect(item);
 
         cardsDictionaryView.update(model);
     }
@@ -67,10 +67,19 @@ public class CardsDictionaryActivity extends BaseActivity {
 
     private class Model {
         private final List<CardItem> cards = new LinkedList<>();
+        private final Set<CardItem> selected = new HashSet<>();
 
         private Model(List<LearningCard> cards) {
             for (LearningCard card : cards) {
                 this.cards.add(new CardItem(card));
+            }
+        }
+
+        public void toggleSelect(CardItem item) {
+            if (selected.contains(item)) {
+                selected.remove(item);
+            } else {
+                selected.add(item);
             }
         }
 
@@ -83,6 +92,10 @@ public class CardsDictionaryActivity extends BaseActivity {
 
             private CardItem(LearningCard card) {
                 this.card = card;
+            }
+
+            public boolean isSelected() {
+                return selected.contains(this);
             }
 
             public String getText() {
@@ -101,7 +114,13 @@ public class CardsDictionaryActivity extends BaseActivity {
 
         public CardsDictionaryView() {
             listCards = findViewById(R.id.list_cards);
-
+            listCards.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Model.CardItem item = (Model.CardItem) listCards.getAdapter().getItem(position);
+                    onToggleSelect(item);
+                }
+            });
             /*FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +152,13 @@ public class CardsDictionaryActivity extends BaseActivity {
 
                 TextView subText = convertView.findViewById(R.id.list_item_card_sub_text);
                 subText.setText(Objects.requireNonNull(item).getSubText());
+
+                ImageView check = convertView.findViewById(R.id.list_item_card_checkbox);
+                if (item.isSelected()) {
+                    check.setVisibility(View.VISIBLE);
+                } else {
+                    check.setVisibility(View.INVISIBLE);
+                }
 
                 return convertView;
             }
