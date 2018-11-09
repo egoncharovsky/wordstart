@@ -15,12 +15,14 @@ import java.util.Map;
 public class LearningCardRepositoryImpl implements LearningCardRepository {
 
     @SuppressLint("UseSparseArrays")
-    private static Map<Long, LearningCard> data = new HashMap<Long, LearningCard>();
+    private static Map<Long, LearningCard> data = new HashMap<>();
     static {
-        LearningCard card = new LearningCard(
+        insertStatic(new LearningCard(
+                new Word("word 2", Language.EN),
+                new Word("слово 2", Language.RU)));
+        insertStatic(new LearningCard(
                 new Word("word", Language.EN),
-                new Word("слово", Language.RU));
-        insertStatic(card);
+                new Word("слово", Language.RU)));
     }
 
     private static LearningCard insertStatic(LearningCard item) {
