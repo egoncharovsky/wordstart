@@ -18,6 +18,8 @@ import ru.egoncharovsky.wordstart.ui.cards.CardsDictionaryActivity;
 public abstract class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    protected NavigationView menu;
+
     public abstract int getActivityViewId();
 
     @Override
@@ -28,8 +30,9 @@ public abstract class BaseActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar_top);
         setSupportActionBar(toolbar);
 
-        NavigationView navigationView = findViewById(R.id.app_side_menu);
-        navigationView.setNavigationItemSelectedListener(this);
+
+        menu = findViewById(R.id.app_side_menu);
+        menu.setNavigationItemSelectedListener(this);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

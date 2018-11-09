@@ -15,7 +15,9 @@ import android.widget.TextView;
 import ru.egoncharovsky.wordstart.R;
 import ru.egoncharovsky.wordstart.ui.RecyclerItemClickListener;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class CardsDictionaryView {
 
@@ -58,13 +60,12 @@ public class CardsDictionaryView {
     }
 
     void update(CardsDictionaryModel model) {
-        adapter.update(model.getCards(), model.getSelected());
+        adapter.update(model.getCards());
     }
 
     private class CardItemsAdapter extends RecyclerView.Adapter<CardItemsAdapter.ItemView> {
 
         private List<CardsDictionaryModel.CardItem> items = Collections.emptyList();
-        private Set<CardsDictionaryModel.CardItem> selected = Collections.emptySet();
 
         private class ItemView extends RecyclerView.ViewHolder {
             TextView mainText;
@@ -80,9 +81,8 @@ public class CardsDictionaryView {
         }
 
 
-        public void update(List<CardsDictionaryModel.CardItem> cards, Set<CardsDictionaryModel.CardItem> selected) {
+        public void update(List<CardsDictionaryModel.CardItem> cards) {
             this.items = new ArrayList<>(cards);
-            this.selected = new HashSet<>(selected);
             notifyDataSetChanged();
         }
 
@@ -102,7 +102,7 @@ public class CardsDictionaryView {
             holder.mainText.setText(item.getText());
             holder.subText.setText(item.getSubText());
 
-            if (selected.contains(item))
+            if (item.isSelected())
                 holder.layout.setBackgroundColor(ContextCompat.getColor(context, R.color.list_item_selected_state));
             else
                 holder.layout.setBackgroundColor(ContextCompat.getColor(context, R.color.list_item_normal_state));

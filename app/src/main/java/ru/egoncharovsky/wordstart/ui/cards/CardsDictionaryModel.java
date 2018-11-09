@@ -26,10 +26,6 @@ public class CardsDictionaryModel {
         return new ArrayList<>(cards);
     }
 
-    public Set<CardItem> getSelected() {
-        return new HashSet<>(selected);
-    }
-
     public class CardItem {
         private final LearningCard card;
 
