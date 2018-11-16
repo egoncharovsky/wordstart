@@ -34,6 +34,10 @@ public class CardsDictionaryModel {
         return new HashSet<>(selected);
     }
 
+    public void clearSelected() {
+        selected.clear();
+    }
+
     public class CardItem {
         private final LearningCard card;
 

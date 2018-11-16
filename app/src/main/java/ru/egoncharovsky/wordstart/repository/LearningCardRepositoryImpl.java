@@ -16,6 +16,7 @@ public class LearningCardRepositoryImpl implements LearningCardRepository {
 
     @SuppressLint("UseSparseArrays")
     private static Map<Long, LearningCard> data = new HashMap<>();
+    private static Long counter = 0L;
     static {
         insertStatic(new LearningCard(
                 new Word("word 2", Language.EN),
@@ -26,7 +27,7 @@ public class LearningCardRepositoryImpl implements LearningCardRepository {
     }
 
     private static LearningCard insertStatic(LearningCard item) {
-        item.setId((long) (data.size() + 1));
+        item.setId((counter++));
         data.put(item.getId(), item);
         return item;
     }

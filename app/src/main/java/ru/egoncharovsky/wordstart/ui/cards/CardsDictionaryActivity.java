@@ -36,21 +36,21 @@ public class CardsDictionaryActivity extends BaseActivity {
     public void onItemClick(CardsDictionaryModel.CardItem item) {
         if (isMultiSelectMode()) {
             model.toggleSelect(item);
-            view.update(model);
 
             if (!model.hasSelected()) {
                 actionMode.finish();
             }
+
+            view.update(model);
         }
     }
 
     public void onItemLongClick(CardsDictionaryModel.CardItem item) {
         model.toggleSelect(item);
-        view.update(model);
 
-        if (!isMultiSelectMode()) {
-            actionMode = startSupportActionMode(actionModeCallback);
-        }
+        activateMultiSelectMode();
+
+        view.update(model);
     }
 
     public void onDeleteCards() {
@@ -59,15 +59,28 @@ public class CardsDictionaryActivity extends BaseActivity {
         }
 
         model = new CardsDictionaryModel(cardsService.getAll());
-        view.update(model);
 
         if (!model.hasSelected()) {
-            actionMode.finish();
+            activateNormalMode();
         }
+
+        view.update(model);
     }
 
     public void onCreateCard() {
         System.out.println("created");
+    }
+
+    private void activateMultiSelectMode() {
+        if (actionMode == null) {
+            actionMode = startSupportActionMode(actionModeCallback);
+        }
+    }
+
+    private void activateNormalMode() {
+        if (actionMode != null) {
+            actionMode.finish();
+        }
     }
 
     private boolean isMultiSelectMode() {
@@ -124,6 +137,8 @@ public class CardsDictionaryActivity extends BaseActivity {
             @Override
             public void onDestroyActionMode(ActionMode mode) {
                 actionMode = null;
+                model.clearSelected();
+                view.update(model);
             }
         };
 
