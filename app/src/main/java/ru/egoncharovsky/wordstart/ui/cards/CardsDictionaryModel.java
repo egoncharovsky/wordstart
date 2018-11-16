@@ -22,6 +22,10 @@ public class CardsDictionaryModel {
         }
     }
 
+    public boolean hasSelected() {
+        return !selected.isEmpty();
+    }
+
     public List<CardItem> getCards() {
         return new ArrayList<>(cards);
     }

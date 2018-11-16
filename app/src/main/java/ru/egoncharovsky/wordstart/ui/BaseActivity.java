@@ -30,7 +30,6 @@ public abstract class BaseActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar_top);
         setSupportActionBar(toolbar);
 
-
         menu = findViewById(R.id.app_side_menu);
         menu.setNavigationItemSelectedListener(this);
 

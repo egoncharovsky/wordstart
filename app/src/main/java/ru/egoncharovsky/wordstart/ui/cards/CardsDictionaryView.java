@@ -37,14 +37,12 @@ public class CardsDictionaryView {
         listCards.addOnItemTouchListener(new RecyclerItemClickListener(activity, listCards) {
             @Override
             public void onItemClick(View view, int position) {
-                System.out.println("click");
-                activity.onToggleSelect(adapter.get(position));
+                activity.onItemClick(adapter.get(position));
             }
 
             @Override
             public void onItemLongClick(View view, int position) {
-                System.out.println("long");
-                activity.onToggleSelect(adapter.get(position));
+                activity.onItemLongClick(adapter.get(position));
             }
         });
         listCards.setAdapter(adapter);

@@ -1,9 +1,8 @@
 package ru.egoncharovsky.wordstart.ui.cards;
 
 import android.os.Bundle;
-import android.view.ActionMode;
+import android.support.v7.view.ActionMode;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import ru.egoncharovsky.wordstart.R;
 import ru.egoncharovsky.wordstart.domain.learning.LearningCardsService;
@@ -34,12 +33,28 @@ public class CardsDictionaryActivity extends BaseActivity {
         view.update(model);
     }
 
-    public void onToggleSelect(CardsDictionaryModel.CardItem item) {
+    public void onItemClick(CardsDictionaryModel.CardItem item) {
+        if (isMultiSelectMode()) {
+            model.toggleSelect(item);
+            view.update(model);
+
+            if (!model.hasSelected()) {
+                actionMode.finish();
+            }
+        }
+    }
+
+    public void onItemLongClick(CardsDictionaryModel.CardItem item) {
         model.toggleSelect(item);
-
-        actionMode = startActionMode(actionModeCallback);
-
         view.update(model);
+
+        if (!isMultiSelectMode()) {
+            actionMode = startSupportActionMode(actionModeCallback);
+        }
+    }
+
+    private boolean isMultiSelectMode() {
+        return actionMode != null;
     }
 
     @Override
@@ -69,8 +84,7 @@ public class CardsDictionaryActivity extends BaseActivity {
             @Override
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
                 // Inflate a menu resource providing context menu items
-                MenuInflater inflater = mode.getMenuInflater();
-                inflater.inflate(R.menu.menu_multi_select, menu);
+                mode.getMenuInflater().inflate(R.menu.menu_multi_select, menu);
                 return true;
             }
 
@@ -83,6 +97,7 @@ public class CardsDictionaryActivity extends BaseActivity {
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_delete:
+                        actionMode.finish();
                         return true;
                     default:
                         return false;
