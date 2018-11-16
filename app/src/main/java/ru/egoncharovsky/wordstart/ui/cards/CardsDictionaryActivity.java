@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import ru.egoncharovsky.wordstart.R;
 import ru.egoncharovsky.wordstart.domain.learning.LearningCardsService;
+import ru.egoncharovsky.wordstart.external.translate.GoogleTranslator;
 import ru.egoncharovsky.wordstart.repository.LearningCardRepositoryImpl;
 import ru.egoncharovsky.wordstart.ui.BaseActivity;
 
@@ -17,6 +18,8 @@ public class CardsDictionaryActivity extends BaseActivity {
     private CardsDictionaryModel model;
 
     private ActionMode actionMode;
+
+    private GoogleTranslator translator = new GoogleTranslator();
 
     @Override
     public int getActivityViewId() {
@@ -34,6 +37,8 @@ public class CardsDictionaryActivity extends BaseActivity {
     }
 
     public void onItemClick(CardsDictionaryModel.CardItem item) {
+        translator.example();
+
         if (isMultiSelectMode()) {
             model.toggleSelect(item);
 
