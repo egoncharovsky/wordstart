@@ -30,6 +30,10 @@ public class CardsDictionaryModel {
         return new ArrayList<>(cards);
     }
 
+    public Set<CardItem> getSelected() {
+        return new HashSet<>(selected);
+    }
+
     public class CardItem {
         private final LearningCard card;
 
@@ -47,6 +51,10 @@ public class CardsDictionaryModel {
 
         public String getSubText() {
             return card.getTranslationWord().getValue();
+        }
+
+        public Long getCardId() {
+            return card.getId();
         }
     }
 }

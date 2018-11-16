@@ -53,6 +53,23 @@ public class CardsDictionaryActivity extends BaseActivity {
         }
     }
 
+    public void onDeleteCards() {
+        for (CardsDictionaryModel.CardItem item : model.getSelected()) {
+            cardsService.delete(item.getCardId());
+        }
+
+        model = new CardsDictionaryModel(cardsService.getAll());
+        view.update(model);
+
+        if (!model.hasSelected()) {
+            actionMode.finish();
+        }
+    }
+
+    public void onCreateCard() {
+        System.out.println("created");
+    }
+
     private boolean isMultiSelectMode() {
         return actionMode != null;
     }
@@ -97,7 +114,7 @@ public class CardsDictionaryActivity extends BaseActivity {
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_delete:
-                        actionMode.finish();
+                        onDeleteCards();
                         return true;
                     default:
                         return false;
