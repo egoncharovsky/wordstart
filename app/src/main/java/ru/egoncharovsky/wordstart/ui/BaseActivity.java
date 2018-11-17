@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import ru.egoncharovsky.wordstart.R;
 import ru.egoncharovsky.wordstart.ui.cards.CardsDictionaryActivity;
+import ru.egoncharovsky.wordstart.ui.translate.TranslateActivity;
 
 public abstract class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

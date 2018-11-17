@@ -118,6 +118,8 @@ public class CardsDictionaryActivity extends BaseActivity implements ModelView<C
 //                        .setAction("Action", null).show();
             }
         });
+
+        this.controller = new CardsDictionaryController(this);
     }
 
     @Override

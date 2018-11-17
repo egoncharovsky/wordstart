@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.TranslateActivity"
+        <activity android:name=".ui.translate.TranslateActivity"
                   android:label="@string/translator"
                   android:theme="@style/AppTheme.NoActionBar"/>
     </application>
