@@ -14,13 +14,14 @@ import ru.egoncharovsky.wordstart.domain.word.Language;
 import ru.egoncharovsky.wordstart.domain.word.Translation;
 import ru.egoncharovsky.wordstart.domain.word.TranslationService;
 import ru.egoncharovsky.wordstart.domain.word.Word;
+import ru.egoncharovsky.wordstart.external.translate.glosbe.GlosbeService;
 import ru.egoncharovsky.wordstart.repository.LearningCardRepositoryImpl;
 
 import java.util.*;
 
 public class TranslateActivity extends BaseActivity {
 
-    private TranslationService translationService = new TranslationService();
+    private TranslationService translationService = new TranslationService(new GlosbeService());
     private LearningCardsService cardsService = new LearningCardsService(new LearningCardRepositoryImpl());
 
     private TranslateView translateView;
@@ -44,6 +45,8 @@ public class TranslateActivity extends BaseActivity {
         if (!input.isEmpty()) {
             Word word = new Word(input, model.getFrom());
 
+//            Translation translation = new TranslateTask().execute()
+//                    ;
             Translation translation = translationService.translate(word, model.getTo());
             Set<LearningCard> cards = new HashSet<>(cardsService.getCardsFor(translation));
 
@@ -60,6 +63,34 @@ public class TranslateActivity extends BaseActivity {
 
         cardsService.save(card);
     }
+
+//    private class TranslateTask extends AsyncTask<TranslateRequest, Void, Translation> {
+//
+//        @Override
+//        protected Translation doInBackground(TranslateRequest... translateRequests) {
+//            TranslateRequest request = translateRequests[0];
+//            translationService.translate(request.getWord(), request.getToLanguage());
+//            return null;
+//        }
+//    }
+//
+//    private class TranslateRequest {
+//        private Word word;
+//        private Language toLanguage;
+//
+//        public TranslateRequest(Word word, Language toLanguage) {
+//            this.word = word;
+//            this.toLanguage = toLanguage;
+//        }
+//
+//        public Word getWord() {
+//            return word;
+//        }
+//
+//        public Language getToLanguage() {
+//            return toLanguage;
+//        }
+//    }
 
     private class Model {
         private final Language from;

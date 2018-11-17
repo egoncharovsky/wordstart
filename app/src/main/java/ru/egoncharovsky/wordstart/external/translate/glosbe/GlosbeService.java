@@ -2,8 +2,8 @@ package ru.egoncharovsky.wordstart.external.translate.glosbe;
 
 import org.springframework.web.client.RestTemplate;
 import ru.egoncharovsky.wordstart.domain.word.Language;
-import ru.egoncharovsky.wordstart.domain.word.TranslateService;
 import ru.egoncharovsky.wordstart.domain.word.Translation;
+import ru.egoncharovsky.wordstart.domain.word.Translator;
 import ru.egoncharovsky.wordstart.domain.word.Word;
 import ru.egoncharovsky.wordstart.external.translate.glosbe.model.GlosbePhrase;
 import ru.egoncharovsky.wordstart.external.translate.glosbe.model.GlosbeTranslation;
@@ -15,7 +15,7 @@ import java.net.URI;
 /**
  * Powered by API of <a href="https://glosbe.com/">Glosbe Dictionary</a>
  */
-public class GlosbeService implements TranslateService {
+public class GlosbeService implements Translator {
 
     private static final String ENDPOINT_TRANSLATE = "https://glosbe.com/gapi/translate";
     private RestTemplate rest = new RestTemplate();
