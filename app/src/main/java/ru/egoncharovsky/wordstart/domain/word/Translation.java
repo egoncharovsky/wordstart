@@ -9,7 +9,7 @@ public class Translation extends Entity {
 
     private final Word originalWord;
 
-    private List<Variant> translationVariants;
+    private final List<Variant> translationVariants;
 
     private final Language translationLanguage;
 
@@ -20,20 +20,18 @@ public class Translation extends Entity {
 
         this.originalWord = originalWord;
         this.translationLanguage = toLanguage;
-        translationVariants = new LinkedList<Variant>();
+        translationVariants = new LinkedList<>();
     }
 
     public Word getOriginalWord() {
         return originalWord;
     }
 
-    public List<Variant> getTranslationVariants() {
+    public List<Variant> getVariants() {
         return translationVariants;
     }
 
     public void addVariant(Variant translation) {
-
-
         translationVariants.add(translation);
     }
 
@@ -53,7 +51,7 @@ public class Translation extends Entity {
     }
 
     public class Variant {
-        private Word word;
+        private final Word word;
 
         public Variant(Word word) {
             if (word.getLanguage() != translationLanguage) {
@@ -66,6 +64,13 @@ public class Translation extends Entity {
 
         public Word getWord() {
             return word;
+        }
+
+        @Override
+        public String toString() {
+            return "Variant{" +
+                    "value=" + word.getValue() +
+                    '}';
         }
     }
 }

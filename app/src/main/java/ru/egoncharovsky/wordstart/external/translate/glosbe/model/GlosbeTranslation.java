@@ -6,12 +6,22 @@ import java.util.List;
 
 public class GlosbeTranslation {
 
+    private GlosbePhrase phrase;
+
     private List<GlosbeMeaning> meanings;
 
     private Long meaningId;
 
     @JsonProperty("authors")
     private List<Long> authorIds;
+
+    public GlosbePhrase getPhrase() {
+        return phrase;
+    }
+
+    public void setPhrase(GlosbePhrase phrase) {
+        this.phrase = phrase;
+    }
 
     public List<GlosbeMeaning> getMeanings() {
         return meanings;

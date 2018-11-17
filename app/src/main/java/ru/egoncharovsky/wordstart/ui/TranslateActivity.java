@@ -83,7 +83,7 @@ public class TranslateActivity extends BaseActivity {
             translatedWord = translation.getOriginalWord();
 
             items = new LinkedHashSet<>();
-            for (Translation.Variant variant : translation.getTranslationVariants()) {
+            for (Translation.Variant variant : translation.getVariants()) {
                 TranslationItem item = new TranslationItem(variant);
 
                 if (cards != null) {

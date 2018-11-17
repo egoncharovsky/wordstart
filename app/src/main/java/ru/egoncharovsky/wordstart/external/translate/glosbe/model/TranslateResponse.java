@@ -12,11 +12,12 @@ public class TranslateResponse {
     @JsonProperty("tuc")
     private List<GlosbeTranslation> translations;
 
-    private String phrase;
+    @JsonProperty("phrase")
+    private String originalPhrase;
 
     private List<GlosbeExample> examples;
 
-    @JsonProperty("phrase")
+    @JsonProperty("from")
     private String fromLanguage;
 
     @JsonProperty("dest")
@@ -43,12 +44,12 @@ public class TranslateResponse {
         this.translations = translations;
     }
 
-    public String getPhrase() {
-        return phrase;
+    public String getOriginalPhrase() {
+        return originalPhrase;
     }
 
-    public void setPhrase(String phrase) {
-        this.phrase = phrase;
+    public void setOriginalPhrase(String originalPhrase) {
+        this.originalPhrase = originalPhrase;
     }
 
     public List<GlosbeExample> getExamples() {

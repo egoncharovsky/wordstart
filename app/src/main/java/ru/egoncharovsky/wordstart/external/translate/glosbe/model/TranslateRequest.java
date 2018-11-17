@@ -1,15 +1,16 @@
 package ru.egoncharovsky.wordstart.external.translate.glosbe.model;
 
 import org.springframework.util.Assert;
+import org.springframework.web.util.UriComponentsBuilder;
+import ru.egoncharovsky.wordstart.domain.word.Language;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.net.URI;
 
 public class TranslateRequest {
 
-    private String fromLanguage;
+    private GlosbeLanguage fromLanguage;
 
-    private String destinationLanguage;
+    private GlosbeLanguage destinationLanguage;
 
     private String format = "json";
 
@@ -19,51 +20,56 @@ public class TranslateRequest {
 
     private Boolean pretty = true;
 
-    public Map<String, ?> asGetOptions() {
+    public URI toGetURI(String baseUri) {
         Assert.notNull(fromLanguage, "From language must be specified");
         Assert.notNull(destinationLanguage, "Destination language must be specified");
         Assert.isTrue(!fromLanguage.equals(destinationLanguage), "From language must differ from destination");
         Assert.notNull(phrase, "Phrase for translation must be specified");
         Assert.notNull(format, "Format must be specified");
 
-        return new HashMap<String, Object>() {{
-           put("from", fromLanguage);
-           put("dest", destinationLanguage);
-           put("format", format);
-           put("phrase", phrase);
-           put("tm", translateMemory);
-           put("pretty", pretty);
-        }};
+        UriComponentsBuilder b = UriComponentsBuilder.fromHttpUrl(baseUri)
+                .queryParam("from", fromLanguage)
+                .queryParam("dest", destinationLanguage)
+                .queryParam("phrase", phrase)
+                .queryParam("format", format);
+        if (translateMemory != null) {
+            b.queryParam("tm", translateMemory);
+        }
+        if (pretty != null) {
+            b.queryParam("pretty", pretty);
+        }
+
+        return b.build().encode().toUri();
     }
 
-    public TranslateRequest from(String from) {
-        setFromLanguage(from);
+    public TranslateRequest from(Language from) {
+        setFromLanguage(GlosbeLanguage.from(from));
         return this;
     }
 
-    public TranslateRequest dest(String dest) {
-        setDestinationLanguage(dest);
+    public TranslateRequest dest(Language dest) {
+        setDestinationLanguage(GlosbeLanguage.from(dest));
         return this;
     }
 
     public TranslateRequest phrase(String phrase) {
-        setPhrase(phrase);
+        setPhrase(phrase.toLowerCase().trim());
         return this;
     }
 
-    public String getFromLanguage() {
+    public GlosbeLanguage getFromLanguage() {
         return fromLanguage;
     }
 
-    public void setFromLanguage(String fromLanguage) {
+    public void setFromLanguage(GlosbeLanguage fromLanguage) {
         this.fromLanguage = fromLanguage;
     }
 
-    public String getDestinationLanguage() {
+    public GlosbeLanguage getDestinationLanguage() {
         return destinationLanguage;
     }
 
-    public void setDestinationLanguage(String destinationLanguage) {
+    public void setDestinationLanguage(GlosbeLanguage destinationLanguage) {
         this.destinationLanguage = destinationLanguage;
     }
 
