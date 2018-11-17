@@ -44,9 +44,7 @@ public class TranslateControllerImpl implements TranslateController {
 
     @Override
     public void onCreateCard(TranslateModel.TranslationItem item) {
-        LearningCard card = item.toCard();
-        cardsService.save(card);
-
+        cardsService.save(item.toCard());
         view.update(model);
     }
 }

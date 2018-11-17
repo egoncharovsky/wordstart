@@ -22,25 +22,9 @@ import java.util.List;
 
 public class CardsDictionaryActivity extends BaseActivity implements ModelView<CardsDictionaryModel> {
 
-    private Controller controller;
+    private CardsDictionaryController controller;
 
-    public interface Controller {
-        void onDeleteCards();
-
-        void onBackToNormalMode();
-
-        ItemActions multiSelect();
-
-        ItemActions normalSelect();
-
-        interface ItemActions {
-            void onItemClick(CardsDictionaryModel.CardItem item);
-
-            void onItemLongClick(CardsDictionaryModel.CardItem item);
-        }
-    }
-
-    private Controller.ItemActions itemActions() {
+    private CardsDictionaryController.ItemActions itemActions() {
         if (isMultiSelectMode()) {
             return controller.multiSelect();
         } else {
@@ -50,7 +34,6 @@ public class CardsDictionaryActivity extends BaseActivity implements ModelView<C
 
     private ActionMode actionMode;
 
-    private CardsDictionaryActivity context;
     private CardItemsAdapter adapter;
 
     private RecyclerView listCards;
@@ -62,36 +45,14 @@ public class CardsDictionaryActivity extends BaseActivity implements ModelView<C
     }
 
     @Override
-    public void update(CardsDictionaryModel model) {
-        if (model.hasSelected()) {
-            activateNormalMode();
-        } else {
-            activateMultiSelectMode();
-        }
-
-        adapter.update(model.getCards());
-    }
-
-    private void activateMultiSelectMode() {
-        if (actionMode == null) {
-            actionMode = startSupportActionMode(actionModeCallback);
-        }
-    }
-
-    private void activateNormalMode() {
-        if (actionMode != null) {
-            actionMode.finish();
-        }
-    }
-
-    private boolean isMultiSelectMode() {
-        return actionMode != null;
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        this.controller = new CardsDictionaryControllerImpl(this);
+    }
+
+    @Override
+    public void init(CardsDictionaryModel model) {
         this.adapter = new CardItemsAdapter();
 
         listCards = findViewById(R.id.list_cards);
@@ -119,8 +80,36 @@ public class CardsDictionaryActivity extends BaseActivity implements ModelView<C
             }
         });
 
-        this.controller = new CardsDictionaryController(this);
+        update(model);
     }
+
+    @Override
+    public void update(CardsDictionaryModel model) {
+        if (model.hasSelected()) {
+            activateMultiSelectMode();
+        } else {
+            activateNormalMode();
+        }
+
+        adapter.update(model.getCards());
+    }
+
+    private void activateMultiSelectMode() {
+        if (actionMode == null) {
+            actionMode = startSupportActionMode(actionModeCallback);
+        }
+    }
+
+    private void activateNormalMode() {
+        if (actionMode != null) {
+            actionMode.finish();
+        }
+    }
+
+    private boolean isMultiSelectMode() {
+        return actionMode != null;
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -216,9 +205,9 @@ public class CardsDictionaryActivity extends BaseActivity implements ModelView<C
             holder.subText.setText(item.getSubText());
 
             if (item.isSelected())
-                holder.layout.setBackgroundColor(ContextCompat.getColor(context, R.color.list_item_selected_state));
+                holder.layout.setBackgroundColor(ContextCompat.getColor(CardsDictionaryActivity.this, R.color.list_item_selected_state));
             else
-                holder.layout.setBackgroundColor(ContextCompat.getColor(context, R.color.list_item_normal_state));
+                holder.layout.setBackgroundColor(ContextCompat.getColor(CardsDictionaryActivity.this, R.color.list_item_normal_state));
 
         }
 
