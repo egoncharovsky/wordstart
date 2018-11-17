@@ -1,5 +1,6 @@
-package ru.egoncharovsky.wordstart.external.translate;
+package ru.egoncharovsky.wordstart.external.translate.glosbe;
 
+import org.springframework.web.client.RestTemplate;
 import ru.egoncharovsky.wordstart.domain.word.Language;
 import ru.egoncharovsky.wordstart.domain.word.TranslateService;
 import ru.egoncharovsky.wordstart.domain.word.Translation;
@@ -10,11 +11,13 @@ import ru.egoncharovsky.wordstart.domain.word.Word;
  */
 public class GlosbeService implements TranslateService {
 
+    private RestTemplate rest = new RestTemplate();
 
     @Override
     public Translation translate(Word word, Language toLanguage) {
 
-
         return null;
     }
+
+
 }
