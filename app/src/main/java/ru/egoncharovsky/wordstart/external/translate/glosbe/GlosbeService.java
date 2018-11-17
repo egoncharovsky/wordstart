@@ -1,5 +1,6 @@
 package ru.egoncharovsky.wordstart.external.translate.glosbe;
 
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 import ru.egoncharovsky.wordstart.domain.word.Language;
 import ru.egoncharovsky.wordstart.domain.word.Translation;
@@ -18,7 +19,9 @@ import java.net.URI;
 public class GlosbeService implements Translator {
 
     private static final String ENDPOINT_TRANSLATE = "https://glosbe.com/gapi/translate";
-    private RestTemplate rest = new RestTemplate();
+    private RestTemplate rest = new RestTemplate() {{
+        getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+    }};
 
     @Override
     public Translation translate(Word word, Language toLanguage) {

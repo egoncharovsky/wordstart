@@ -37,7 +37,8 @@ public class TranslateActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         translateView = new TranslateView();
-        model = new Model(Language.RU, Language.EN);
+        // todo add choose language
+        model = new Model(Language.EN, Language.RU);
     }
 
     public void onTranslate(View view) {
@@ -45,9 +46,9 @@ public class TranslateActivity extends BaseActivity {
         if (!input.isEmpty()) {
             Word word = new Word(input, model.getFrom());
 
-//            Translation translation = new TranslateTask().execute()
-//                    ;
             Translation translation = translationService.translate(word, model.getTo());
+            // todo if no variants - print message
+
             Set<LearningCard> cards = new HashSet<>(cardsService.getCardsFor(translation));
 
             model = new Model(translation, cards);
