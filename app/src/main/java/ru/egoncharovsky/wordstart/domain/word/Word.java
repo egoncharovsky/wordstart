@@ -7,7 +7,7 @@ import java.util.Objects;
 /**
  * Immutable
  */
-public class Word extends Entity {
+public class Word extends Entity {//todo rename to Phrase
 
     private final String value;
 
