@@ -1,6 +1,6 @@
 package ru.egoncharovsky.wordstart.ui.translate;
 
-import ru.egoncharovsky.wordstart.domain.learning.LearningCard;
+import ru.egoncharovsky.wordstart.domain.card.LearningCard;
 import ru.egoncharovsky.wordstart.domain.word.Language;
 import ru.egoncharovsky.wordstart.domain.word.Translation;
 import ru.egoncharovsky.wordstart.domain.word.Word;

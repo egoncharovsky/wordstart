@@ -1,6 +1,6 @@
 package ru.egoncharovsky.wordstart.ui.cards;
 
-import ru.egoncharovsky.wordstart.domain.learning.LearningCardsService;
+import ru.egoncharovsky.wordstart.domain.card.LearningCardsService;
 import ru.egoncharovsky.wordstart.repository.LearningCardRepositoryImpl;
 import ru.egoncharovsky.wordstart.ui.ModelView;
 
@@ -21,7 +21,7 @@ public class CardsDictionaryControllerImpl implements CardsDictionaryController 
 
     @Override
     public void onDeleteCards() {
-        for (CardsDictionaryModel.CardItem item : model.getSelected()) {
+        for (CardsDictionaryModel.Item item : model.getSelected()) {
             cardsService.delete(item.getCardId());
         }
 
@@ -39,13 +39,13 @@ public class CardsDictionaryControllerImpl implements CardsDictionaryController 
     public ItemActions multiSelect() {
         return new ItemActions() {
             @Override
-            public void onItemClick(CardsDictionaryModel.CardItem item) {
+            public void onItemClick(CardsDictionaryModel.Item item) {
                 model.toggleSelect(item);
                 view.update(model);
             }
 
             @Override
-            public void onItemLongClick(CardsDictionaryModel.CardItem item) {
+            public void onItemLongClick(CardsDictionaryModel.Item item) {
                 model.toggleSelect(item);
                 view.update(model);
             }
@@ -56,12 +56,12 @@ public class CardsDictionaryControllerImpl implements CardsDictionaryController 
     public ItemActions normalSelect() {
         return new ItemActions() {
             @Override
-            public void onItemClick(CardsDictionaryModel.CardItem item) {
+            public void onItemClick(CardsDictionaryModel.Item item) {
 
             }
 
             @Override
-            public void onItemLongClick(CardsDictionaryModel.CardItem item) {
+            public void onItemLongClick(CardsDictionaryModel.Item item) {
                 model.toggleSelect(item);
                 view.update(model);
             }

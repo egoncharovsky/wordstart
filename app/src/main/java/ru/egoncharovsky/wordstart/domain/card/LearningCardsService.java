@@ -1,4 +1,4 @@
-package ru.egoncharovsky.wordstart.domain.learning;
+package ru.egoncharovsky.wordstart.domain.card;
 
 import ru.egoncharovsky.wordstart.domain.word.Translation;
 

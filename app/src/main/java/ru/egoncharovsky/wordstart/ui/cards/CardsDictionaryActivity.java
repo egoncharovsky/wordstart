@@ -167,7 +167,7 @@ public class CardsDictionaryActivity extends BaseActivity implements ModelView<C
 
     private class CardItemsAdapter extends RecyclerView.Adapter<CardItemsAdapter.ItemView> {
 
-        private List<CardsDictionaryModel.CardItem> items = Collections.emptyList();
+        private List<CardsDictionaryModel.Item> items = Collections.emptyList();
 
         private class ItemView extends RecyclerView.ViewHolder {
             TextView mainText;
@@ -183,7 +183,7 @@ public class CardsDictionaryActivity extends BaseActivity implements ModelView<C
         }
 
 
-        public void update(List<CardsDictionaryModel.CardItem> cards) {
+        public void update(List<CardsDictionaryModel.Item> cards) {
             this.items = new ArrayList<>(cards);
             notifyDataSetChanged();
         }
@@ -199,7 +199,7 @@ public class CardsDictionaryActivity extends BaseActivity implements ModelView<C
 
         @Override
         public void onBindViewHolder(@NonNull ItemView holder, int position) {
-            CardsDictionaryModel.CardItem item = items.get(position);
+            CardsDictionaryModel.Item item = items.get(position);
 
             holder.mainText.setText(item.getText());
             holder.subText.setText(item.getSubText());
@@ -216,7 +216,7 @@ public class CardsDictionaryActivity extends BaseActivity implements ModelView<C
             return items.size();
         }
 
-        public CardsDictionaryModel.CardItem get(int position) {
+        public CardsDictionaryModel.Item get(int position) {
             return items.get(position);
         }
     }

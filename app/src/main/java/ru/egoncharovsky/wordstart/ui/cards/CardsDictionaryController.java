@@ -10,8 +10,8 @@ public interface CardsDictionaryController {
     ItemActions normalSelect();
 
     interface ItemActions {
-        void onItemClick(CardsDictionaryModel.CardItem item);
+        void onItemClick(CardsDictionaryModel.Item item);
 
-        void onItemLongClick(CardsDictionaryModel.CardItem item);
+        void onItemLongClick(CardsDictionaryModel.Item item);
     }
 }

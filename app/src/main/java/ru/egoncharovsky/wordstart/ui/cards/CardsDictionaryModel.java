@@ -1,20 +1,20 @@
 package ru.egoncharovsky.wordstart.ui.cards;
 
-import ru.egoncharovsky.wordstart.domain.learning.LearningCard;
+import ru.egoncharovsky.wordstart.domain.card.LearningCard;
 
 import java.util.*;
 
 public class CardsDictionaryModel {
-    private final List<CardItem> cards = new LinkedList<>();
-    private final Set<CardItem> selected = new HashSet<>();
+    private final List<Item> cards = new LinkedList<>();
+    private final Set<Item> selected = new HashSet<>();
 
     public CardsDictionaryModel(List<LearningCard> cards) {
         for (LearningCard card : cards) {
-            this.cards.add(new CardItem(card));
+            this.cards.add(new Item(card));
         }
     }
 
-    public void toggleSelect(CardItem item) {
+    public void toggleSelect(Item item) {
         if (selected.contains(item)) {
             selected.remove(item);
         } else {
@@ -26,11 +26,11 @@ public class CardsDictionaryModel {
         return !selected.isEmpty();
     }
 
-    public List<CardItem> getCards() {
+    public List<Item> getCards() {
         return new ArrayList<>(cards);
     }
 
-    public Set<CardItem> getSelected() {
+    public Set<Item> getSelected() {
         return new HashSet<>(selected);
     }
 
@@ -38,10 +38,10 @@ public class CardsDictionaryModel {
         selected.clear();
     }
 
-    public class CardItem {
+    public class Item {
         private final LearningCard card;
 
-        private CardItem(LearningCard card) {
+        private Item(LearningCard card) {
             this.card = card;
         }
 

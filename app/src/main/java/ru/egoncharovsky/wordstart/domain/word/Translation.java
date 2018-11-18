@@ -31,6 +31,7 @@ public class Translation extends Entity {
         return translationVariants;
     }
 
+    @Deprecated //make immutable
     public void addVariant(Variant translation) {
         translationVariants.add(translation);
     }

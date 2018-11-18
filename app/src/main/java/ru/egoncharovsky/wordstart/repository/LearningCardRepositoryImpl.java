@@ -1,8 +1,8 @@
 package ru.egoncharovsky.wordstart.repository;
 
 import android.annotation.SuppressLint;
-import ru.egoncharovsky.wordstart.domain.learning.LearningCard;
-import ru.egoncharovsky.wordstart.domain.learning.LearningCardRepository;
+import ru.egoncharovsky.wordstart.domain.card.LearningCard;
+import ru.egoncharovsky.wordstart.domain.card.LearningCardRepository;
 import ru.egoncharovsky.wordstart.domain.word.Language;
 import ru.egoncharovsky.wordstart.domain.word.Translation;
 import ru.egoncharovsky.wordstart.domain.word.Word;
@@ -27,7 +27,7 @@ public class LearningCardRepositoryImpl implements LearningCardRepository {
     }
 
     private static LearningCard insertStatic(LearningCard item) {
-        item.setId((counter++));
+        item.persist((counter++));
         data.put(item.getId(), item);
         return item;
     }
