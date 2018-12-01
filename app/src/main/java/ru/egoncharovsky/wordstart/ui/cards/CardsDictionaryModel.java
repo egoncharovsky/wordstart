@@ -50,11 +50,11 @@ public class CardsDictionaryModel {
         }
 
         public String getText() {
-            return card.getOriginalWord().getValue();
+            return card.getOriginalPhrase().getValue();
         }
 
         public String getSubText() {
-            return card.getTranslationWord().getValue();
+            return card.getTranslationPhrase().getValue();
         }
 
         public Long getCardId() {

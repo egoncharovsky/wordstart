@@ -7,13 +7,13 @@ import java.util.Objects;
 /**
  * Immutable
  */
-public class Word extends Entity {//todo rename to Phrase
+public class Phrase extends Entity {
 
     private final String value;
 
     private final Language language;
 
-    public Word(String value, Language language) {
+    public Phrase(String value, Language language) {
         Objects.requireNonNull(value);
         Objects.requireNonNull(language);
 
@@ -23,7 +23,7 @@ public class Word extends Entity {//todo rename to Phrase
 
     @Override
     public String toString() {
-        return "Word{" +
+        return "Phrase{" +
                 "value='" + value + '\'' +
                 '}';
     }
@@ -31,11 +31,11 @@ public class Word extends Entity {//todo rename to Phrase
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Word)) return false;
+        if (!(o instanceof Phrase)) return false;
         if (!super.equals(o)) return false;
-        Word word = (Word) o;
-        return Objects.equals(getValue(), word.getValue()) &&
-                getLanguage() == word.getLanguage();
+        Phrase phrase = (Phrase) o;
+        return Objects.equals(getValue(), phrase.getValue()) &&
+                getLanguage() == phrase.getLanguage();
     }
 
     @Override

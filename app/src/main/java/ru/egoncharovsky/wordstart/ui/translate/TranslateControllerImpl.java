@@ -3,9 +3,9 @@ package ru.egoncharovsky.wordstart.ui.translate;
 import ru.egoncharovsky.wordstart.domain.card.LearningCard;
 import ru.egoncharovsky.wordstart.domain.card.LearningCardsService;
 import ru.egoncharovsky.wordstart.domain.word.Language;
+import ru.egoncharovsky.wordstart.domain.word.Phrase;
 import ru.egoncharovsky.wordstart.domain.word.Translation;
 import ru.egoncharovsky.wordstart.domain.word.TranslationService;
-import ru.egoncharovsky.wordstart.domain.word.Word;
 import ru.egoncharovsky.wordstart.external.translate.glosbe.GlosbeService;
 import ru.egoncharovsky.wordstart.repository.LearningCardRepositoryImpl;
 import ru.egoncharovsky.wordstart.ui.ModelView;
@@ -32,9 +32,9 @@ public class TranslateControllerImpl implements TranslateController {
 
     @Override
     public void onTranslate(String input) {
-        Word word = new Word(input, model.getFrom());
+        Phrase phrase = new Phrase(input, model.getFrom());
 
-        Translation translation = translationService.translate(word, model.getTo());
+        Translation translation = translationService.translate(phrase, model.getTo());
 
         Set<LearningCard> cards = new HashSet<>(cardsService.getCardsFor(translation));
         model = new TranslateModel(translation, cards);

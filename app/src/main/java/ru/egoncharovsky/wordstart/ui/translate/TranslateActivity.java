@@ -94,7 +94,7 @@ public class TranslateActivity extends BaseActivity implements ModelView<Transla
                 TranslateModel.TranslationItem item = getItem(position);
 
                 TextView textView = convertView.findViewById(R.id.list_item_translation_word);
-                textView.setText(Objects.requireNonNull(item).getWord());
+                textView.setText(Objects.requireNonNull(item).getPhrase());
 
                 ImageView button = convertView.findViewById(R.id.button_create_card);
                 if (item.isMarked()) {

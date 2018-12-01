@@ -2,5 +2,5 @@ package ru.egoncharovsky.wordstart.domain.word;
 
 public interface Translator {
 
-    Translation translate(Word word, Language toLanguage);
+    Translation translate(Phrase phrase, Language toLanguage);
 }

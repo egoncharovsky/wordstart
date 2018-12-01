@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class CardPack extends Entity {
 
-    private final String name;
+    private String name;
 
     private final Set<LearningCard> cards;
 
@@ -25,6 +25,7 @@ public class CardPack extends Entity {
 
     public void rename(String name) {
         Objects.requireNonNull(name);
+        this.name = name;
     }
 
     public void addCard(LearningCard card) {

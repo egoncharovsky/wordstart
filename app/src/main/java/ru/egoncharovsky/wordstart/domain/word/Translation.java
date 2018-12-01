@@ -7,28 +7,28 @@ import java.util.List;
 
 public class Translation extends Entity {
 
-    private final Word originalWord;
+    private final Phrase originalPhrase;
 
     private final List<Variant> translationVariants;
 
     private final Language translationLanguage;
 
-    public Translation(Word originalWord, Language toLanguage) {
-        if (originalWord.getLanguage() == toLanguage) {
-            throw new IllegalArgumentException("TranslationItem language must be differ from originalWord");
+    public Translation(Phrase originalPhrase, Language toLanguage) {
+        if (originalPhrase.getLanguage() == toLanguage) {
+            throw new IllegalArgumentException("TranslationItem language must be differ from originalPhrase");
         }
 
-        this.originalWord = originalWord;
+        this.originalPhrase = originalPhrase;
         this.translationLanguage = toLanguage;
         translationVariants = new LinkedList<>();
     }
 
-    public Word getOriginalWord() {
-        return originalWord;
+    public Phrase getOriginalPhrase() {
+        return originalPhrase;
     }
 
     public List<Variant> getVariants() {
-        return translationVariants;
+        return new LinkedList<>(translationVariants);
     }
 
     @Deprecated //make immutable
@@ -37,40 +37,40 @@ public class Translation extends Entity {
     }
 
     public Language getOriginalLanguage() {
-        return originalWord.getLanguage();
+        return originalPhrase.getLanguage();
     }
 
     public Language getTranslationLanguage() {
         return translationLanguage;
     }
 
-    public boolean variantsContainsWord(Word word) {
+    public boolean variantsContainsWord(Phrase phrase) {
         for (Variant variant : translationVariants) {
-            if (variant.getWord().equals(word)) return true;
+            if (variant.getPhrase().equals(phrase)) return true;
         }
         return false;
     }
 
     public class Variant {
-        private final Word word;
+        private final Phrase phrase;
 
-        public Variant(Word word) {
-            if (word.getLanguage() != translationLanguage) {
-                throw new IllegalArgumentException("Expect originalWord language is " +
-                        translationLanguage + " but match " + word.getLanguage());
+        public Variant(Phrase phrase) {
+            if (phrase.getLanguage() != translationLanguage) {
+                throw new IllegalArgumentException("Expect originalPhrase language is " +
+                        translationLanguage + " but match " + phrase.getLanguage());
             }
 
-            this.word = word;
+            this.phrase = phrase;
         }
 
-        public Word getWord() {
-            return word;
+        public Phrase getPhrase() {
+            return phrase;
         }
 
         @Override
         public String toString() {
             return "Variant{" +
-                    "value=" + word.getValue() +
+                    "value=" + phrase.getValue() +
                     '}';
         }
     }

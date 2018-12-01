@@ -15,12 +15,12 @@ public class TranslationService {
         this.translator = translator;
     }
 
-    public Translation translate(final Word word, final Language toLanguage) {
+    public Translation translate(final Phrase phrase, final Language toLanguage) {
         try {
             return executor.submit(new Callable<Translation>() {
                 @Override
                 public Translation call() {
-                    return translator.translate(word, toLanguage);
+                    return translator.translate(phrase, toLanguage);
                 }
             }).get();
         } catch (ExecutionException | InterruptedException e) {

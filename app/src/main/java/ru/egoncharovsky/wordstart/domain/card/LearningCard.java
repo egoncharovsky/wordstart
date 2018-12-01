@@ -1,37 +1,37 @@
 package ru.egoncharovsky.wordstart.domain.card;
 
 import ru.egoncharovsky.wordstart.domain.Entity;
+import ru.egoncharovsky.wordstart.domain.word.Phrase;
 import ru.egoncharovsky.wordstart.domain.word.Translation;
-import ru.egoncharovsky.wordstart.domain.word.Word;
 
 /**
  * Immutable
  */
 public class LearningCard extends Entity {
 
-    private final Word originalWord;
+    private final Phrase originalPhrase;
 
-    private final Word translationWord;
+    private final Phrase translationPhrase;
 
-    public LearningCard(Word originalWord, Word translationWord) {
-        this.originalWord = originalWord;
-        this.translationWord = translationWord;
+    public LearningCard(Phrase originalPhrase, Phrase translationPhrase) {
+        this.originalPhrase = originalPhrase;
+        this.translationPhrase = translationPhrase;
     }
 
     public LearningCard reverse() {
-        return new LearningCard(translationWord, originalWord);
+        return new LearningCard(translationPhrase, originalPhrase);
     }
 
-    public Word getOriginalWord() {
-        return originalWord;
+    public Phrase getOriginalPhrase() {
+        return originalPhrase;
     }
 
-    public Word getTranslationWord() {
-        return translationWord;
+    public Phrase getTranslationPhrase() {
+        return translationPhrase;
     }
 
     public boolean containedInTranslation(Translation translation) {
-        return translation.getOriginalWord().equals(originalWord)
-                && translation.variantsContainsWord(translationWord);
+        return translation.getOriginalPhrase().equals(originalPhrase)
+                && translation.variantsContainsWord(translationPhrase);
     }
 }

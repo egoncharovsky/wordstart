@@ -4,8 +4,8 @@ import android.annotation.SuppressLint;
 import ru.egoncharovsky.wordstart.domain.card.LearningCard;
 import ru.egoncharovsky.wordstart.domain.card.LearningCardRepository;
 import ru.egoncharovsky.wordstart.domain.word.Language;
+import ru.egoncharovsky.wordstart.domain.word.Phrase;
 import ru.egoncharovsky.wordstart.domain.word.Translation;
-import ru.egoncharovsky.wordstart.domain.word.Word;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,15 +19,15 @@ public class LearningCardRepositoryImpl implements LearningCardRepository {
     private static Long counter = 0L;
     static {
         insertStatic(new LearningCard(
-                new Word("word 2", Language.EN),
-                new Word("слово 2", Language.RU)));
+                new Phrase("word 2", Language.EN),
+                new Phrase("слово 2", Language.RU)));
         insertStatic(new LearningCard(
-                new Word("word", Language.EN),
-                new Word("слово", Language.RU)));
+                new Phrase("word", Language.EN),
+                new Phrase("слово", Language.RU)));
     }
 
     private static LearningCard insertStatic(LearningCard item) {
-        item.persist((counter++));
+        item.setId(counter++);
         data.put(item.getId(), item);
         return item;
     }
