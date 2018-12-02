@@ -77,6 +77,7 @@ public class CardsDictionaryActivity extends BaseActivity implements ModelView<C
             public void onClick(View view) {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
+                switchActivityTo(EditCardActivity.class);
             }
         });
 

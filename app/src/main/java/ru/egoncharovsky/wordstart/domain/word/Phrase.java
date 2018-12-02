@@ -14,8 +14,8 @@ public class Phrase extends Entity {
     private final Language language;
 
     public Phrase(String value, Language language) {
-        Objects.requireNonNull(value);
-        Objects.requireNonNull(language);
+        if (value == null || value.isEmpty()) throw new IllegalArgumentException("Phrase value is empty or null");
+        if (language == null) throw new IllegalArgumentException("Phrase language is null");
 
         this.value = value;
         this.language = language;

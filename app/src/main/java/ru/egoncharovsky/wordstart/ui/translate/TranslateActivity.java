@@ -3,7 +3,6 @@ package ru.egoncharovsky.wordstart.ui.translate;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.Editable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
@@ -11,6 +10,7 @@ import ru.egoncharovsky.wordstart.R;
 import ru.egoncharovsky.wordstart.ui.BaseActivity;
 import ru.egoncharovsky.wordstart.ui.EnumAdapter;
 import ru.egoncharovsky.wordstart.ui.ModelView;
+import ru.egoncharovsky.wordstart.ui.shared.TranslateLanguage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,8 +29,8 @@ public class TranslateActivity extends BaseActivity implements ModelView<Transla
 
     private HashMap<ImageView, TranslateModel.TranslationItem> buttonItemMap;
 
-    private EnumAdapter<TranslateModel.TranslateLanguage> langFromAdapter;
-    private EnumAdapter<TranslateModel.TranslateLanguage> langToAdapter;
+    private EnumAdapter<TranslateLanguage> langFromAdapter;
+    private EnumAdapter<TranslateLanguage> langToAdapter;
 
 
     @Override
@@ -63,7 +63,7 @@ public class TranslateActivity extends BaseActivity implements ModelView<Transla
             }
         });
         langFromAdapter = new EnumAdapter<>(
-                this, R.layout.list_item_translate_language, TranslateModel.TranslateLanguage.values());
+                this, R.layout.list_item_language, TranslateLanguage.values());
         langFromChooser.setAdapter(langFromAdapter);
 
         langToChooser = findViewById(R.id.spinner_translate_to);
@@ -79,7 +79,7 @@ public class TranslateActivity extends BaseActivity implements ModelView<Transla
             }
         });
         langToAdapter = new EnumAdapter<>(
-                this, R.layout.list_item_translate_language, TranslateModel.TranslateLanguage.values());
+                this, R.layout.list_item_language, TranslateLanguage.values());
         langToChooser.setAdapter(langToAdapter);
 
         buttonTranslate = findViewById(R.id.button_translate);
@@ -97,7 +97,6 @@ public class TranslateActivity extends BaseActivity implements ModelView<Transla
         if (model.getFrom() != null) {
             langFromChooser.setSelection(langFromAdapter.position(model.getFrom()));
         }
-
         if (model.getTo() != null) {
             langToChooser.setSelection(langToAdapter.position(model.getTo()));
         }
@@ -106,7 +105,7 @@ public class TranslateActivity extends BaseActivity implements ModelView<Transla
     }
 
     public void onTranslate(View view) {
-        String input = getTranslateInput();
+        String input = inputOf(inputTranslate);
         if (!input.isEmpty()) {
             controller.onTranslate(input);
             // todo if no variants - print message
@@ -121,14 +120,6 @@ public class TranslateActivity extends BaseActivity implements ModelView<Transla
 
     public void onSwapLanguage(View view) {
         controller.onSwapLanguage();
-    }
-
-    private String getTranslateInput() {
-        Editable text = inputTranslate.getText();
-        if (text != null) {
-            return text.toString();
-        }
-        return "";
     }
 
     private TranslateModel.TranslationItem getClickedItem(View buttonView) {

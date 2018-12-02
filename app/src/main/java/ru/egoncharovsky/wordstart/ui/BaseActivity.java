@@ -11,7 +11,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.view.MenuItem;
+import android.widget.EditText;
 import ru.egoncharovsky.wordstart.R;
 import ru.egoncharovsky.wordstart.ui.cards.CardsDictionaryActivity;
 import ru.egoncharovsky.wordstart.ui.translate.TranslateActivity;
@@ -71,7 +73,7 @@ public abstract class BaseActivity extends AppCompatActivity
         return true;
     }
 
-    private <ActivityType extends Activity> void switchActivityTo(Class<ActivityType> activity) {
+    protected <ActivityType extends Activity> void switchActivityTo(Class<ActivityType> activity) {
         if (getClass() != activity) {
             startActivity(new Intent(this, activity));
         }
@@ -85,5 +87,13 @@ public abstract class BaseActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+    protected String inputOf(EditText editText) {
+        Editable text = editText.getText();
+        if (text != null) {
+            return text.toString();
+        }
+        return "";
     }
 }

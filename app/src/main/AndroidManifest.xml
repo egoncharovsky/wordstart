@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="ru.egoncharovsky.wordstart">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <!--todo research usesCleartextTraffic for 19 api version-->
     <application
@@ -23,9 +23,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.translate.TranslateActivity"
-                  android:label="@string/translator"
-                  android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+                android:name=".ui.translate.TranslateActivity"
+                android:label="@string/translator"
+                android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+                android:name=".ui.cards.EditCardActivity"
+                android:label="@string/cards_editor"
+                android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

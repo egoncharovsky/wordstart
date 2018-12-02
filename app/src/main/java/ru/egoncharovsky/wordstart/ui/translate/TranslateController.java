@@ -1,5 +1,7 @@
 package ru.egoncharovsky.wordstart.ui.translate;
 
+import ru.egoncharovsky.wordstart.ui.shared.TranslateLanguage;
+
 public interface TranslateController {
     void onTranslate(String input);
 
@@ -7,7 +9,7 @@ public interface TranslateController {
 
     void onSwapLanguage();
 
-    void onFromLanguageSelected(TranslateModel.TranslateLanguage selected);
+    void onFromLanguageSelected(TranslateLanguage selected);
 
-    void onToLanguageSelected(TranslateModel.TranslateLanguage selected);
+    void onToLanguageSelected(TranslateLanguage selected);
 }

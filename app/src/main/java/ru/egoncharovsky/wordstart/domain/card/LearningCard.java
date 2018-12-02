@@ -14,6 +14,9 @@ public class LearningCard extends Entity {
     private final Phrase translationPhrase;
 
     public LearningCard(Phrase originalPhrase, Phrase translationPhrase) {
+        if (originalPhrase.getLanguage().equals(translationPhrase.getLanguage()))
+            throw new IllegalArgumentException("Translation language must differ to original");
+
         this.originalPhrase = originalPhrase;
         this.translationPhrase = translationPhrase;
     }

@@ -9,10 +9,19 @@
 
     <string name="cards_dictionary" translatable="true">Cards</string>
     <string name="translator" translatable="true">Translate</string>
+    <string name="cards_editor" translatable="true">Card edit</string>
+
     <string name="translate" translatable="true">Translate</string>
     <string name="enter_here">Enter here...</string>
+
     <string name="create_card">Save translate to cards</string>
 
     <string name="language_russian" translatable="true">Russian</string>
     <string name="language_english" translatable="true">English</string>
+
+    <string name="back" translatable="true">Back</string>
+    <string name="save" translatable="true">Save</string>
+
+    <string name="edit_card_enter_original">Enter original...</string>
+    <string name="edit_card_enter_translation">Enter translation...</string>
 </resources>

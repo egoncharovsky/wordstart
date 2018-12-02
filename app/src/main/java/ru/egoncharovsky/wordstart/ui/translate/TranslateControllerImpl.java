@@ -8,6 +8,7 @@ import ru.egoncharovsky.wordstart.domain.word.TranslationService;
 import ru.egoncharovsky.wordstart.external.translate.glosbe.GlosbeService;
 import ru.egoncharovsky.wordstart.repository.LearningCardRepositoryImpl;
 import ru.egoncharovsky.wordstart.ui.ModelView;
+import ru.egoncharovsky.wordstart.ui.shared.TranslateLanguage;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +25,7 @@ public class TranslateControllerImpl implements TranslateController {
         this.view = view;
 
         // todo add choose language
-        model = new TranslateModel(TranslateModel.TranslateLanguage.EN, TranslateModel.TranslateLanguage.RU);
+        model = new TranslateModel(TranslateLanguage.EN, TranslateLanguage.RU);
 
         view.init(model);
     }
@@ -54,13 +55,13 @@ public class TranslateControllerImpl implements TranslateController {
     }
 
     @Override
-    public void onFromLanguageSelected(TranslateModel.TranslateLanguage selected) {
+    public void onFromLanguageSelected(TranslateLanguage selected) {
         model = new TranslateModel(selected, model.getTo());
         view.update(model);
     }
 
     @Override
-    public void onToLanguageSelected(TranslateModel.TranslateLanguage selected) {
+    public void onToLanguageSelected(TranslateLanguage selected) {
         model = new TranslateModel(model.getFrom(), selected);
         view.update(model);
     }
