@@ -2,6 +2,5 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:id="@+id/list_item_translate_language"
-          android:textSize="30sp"
-          android:textAlignment="center"/>
+          android:id="@+id/list_item_phrase_language"
+          android:textSize="30sp"/>

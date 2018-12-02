@@ -47,7 +47,7 @@ public class EditCardActivity extends BaseActivity implements ModelView<Void> {
         });
 
         originalLanguage = new EnumSpinnerWrapper<>((Spinner) findViewById(R.id.spinner_edit_card_original_language),
-                new EnumAdapter<>(this, R.layout.list_item_language, TranslateLanguage.values()));
+                new EnumAdapter<>(this, R.layout.list_item_phrase_language, TranslateLanguage.values()));
         originalLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -68,7 +68,7 @@ public class EditCardActivity extends BaseActivity implements ModelView<Void> {
             }
         });
         translationLanguage = new EnumSpinnerWrapper<>((Spinner) findViewById(R.id.spinner_edit_card_translation_language),
-                new EnumAdapter<>(this, R.layout.list_item_language, TranslateLanguage.values()));
+                new EnumAdapter<>(this, R.layout.list_item_phrase_language, TranslateLanguage.values()));
         translationLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

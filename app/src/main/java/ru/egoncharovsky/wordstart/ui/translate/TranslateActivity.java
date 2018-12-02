@@ -63,7 +63,7 @@ public class TranslateActivity extends BaseActivity implements ModelView<Transla
             }
         });
         langFromAdapter = new EnumAdapter<>(
-                this, R.layout.list_item_language, TranslateLanguage.values());
+                this, R.layout.list_item_translate_language, TranslateLanguage.values());
         langFromChooser.setAdapter(langFromAdapter);
 
         langToChooser = findViewById(R.id.spinner_translate_to);
@@ -79,7 +79,7 @@ public class TranslateActivity extends BaseActivity implements ModelView<Transla
             }
         });
         langToAdapter = new EnumAdapter<>(
-                this, R.layout.list_item_language, TranslateLanguage.values());
+                this, R.layout.list_item_translate_language, TranslateLanguage.values());
         langToChooser.setAdapter(langToAdapter);
 
         buttonTranslate = findViewById(R.id.button_translate);
