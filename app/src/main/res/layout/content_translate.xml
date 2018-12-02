@@ -10,6 +10,34 @@
         tools:context=".ui.translate.TranslateActivity"
         android:orientation="vertical">
 
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <Spinner
+                android:id="@+id/spinner_translate_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                app:srcCompat="@drawable/baseline_swap_horiz_black_18dp"
+                android:id="@+id/button_translate_swap_language"
+                android:contentDescription="@string/create_card"
+                android:focusable="true"
+                android:clickable="true"
+                android:onClick="onSwapLanguage"/>
+
+        <Spinner
+                android:id="@+id/spinner_translate_to"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"/>
+    </LinearLayout>
 
     <EditText
             android:layout_width="match_parent"

@@ -21,6 +21,9 @@ public abstract class BaseActivity extends AppCompatActivity
 
     protected NavigationView menu;
 
+    /**
+     * @return {@link R.layout}
+     */
     public abstract int getActivityViewId();
 
     @Override

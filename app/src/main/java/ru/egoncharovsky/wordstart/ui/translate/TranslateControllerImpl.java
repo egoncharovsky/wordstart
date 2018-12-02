@@ -2,7 +2,6 @@ package ru.egoncharovsky.wordstart.ui.translate;
 
 import ru.egoncharovsky.wordstart.domain.card.LearningCard;
 import ru.egoncharovsky.wordstart.domain.card.LearningCardsService;
-import ru.egoncharovsky.wordstart.domain.word.Language;
 import ru.egoncharovsky.wordstart.domain.word.Phrase;
 import ru.egoncharovsky.wordstart.domain.word.Translation;
 import ru.egoncharovsky.wordstart.domain.word.TranslationService;
@@ -25,16 +24,16 @@ public class TranslateControllerImpl implements TranslateController {
         this.view = view;
 
         // todo add choose language
-        model = new TranslateModel(Language.EN, Language.RU);
+        model = new TranslateModel(TranslateModel.TranslateLanguage.EN, TranslateModel.TranslateLanguage.RU);
 
         view.init(model);
     }
 
     @Override
     public void onTranslate(String input) {
-        Phrase phrase = new Phrase(input, model.getFrom());
+        Phrase phrase = new Phrase(input, model.getFrom().getValue());
 
-        Translation translation = translationService.translate(phrase, model.getTo());
+        Translation translation = translationService.translate(phrase, model.getTo().getValue());
 
         Set<LearningCard> cards = new HashSet<>(cardsService.getCardsFor(translation));
         model = new TranslateModel(translation, cards);
@@ -45,6 +44,24 @@ public class TranslateControllerImpl implements TranslateController {
     @Override
     public void onCreateCard(TranslateModel.TranslationItem item) {
         cardsService.save(item.toCard());
+        view.update(model);
+    }
+
+    @Override
+    public void onSwapLanguage() {
+        model = new TranslateModel(model.getTo(), model.getFrom());
+        view.update(model);
+    }
+
+    @Override
+    public void onFromLanguageSelected(TranslateModel.TranslateLanguage selected) {
+        model = new TranslateModel(selected, model.getTo());
+        view.update(model);
+    }
+
+    @Override
+    public void onToLanguageSelected(TranslateModel.TranslateLanguage selected) {
+        model = new TranslateModel(model.getFrom(), selected);
         view.update(model);
     }
 }

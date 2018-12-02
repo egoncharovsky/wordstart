@@ -31,7 +31,6 @@ public class Translation extends Entity {
         return new LinkedList<>(translationVariants);
     }
 
-    @Deprecated //make immutable
     public void addVariant(Variant translation) {
         translationVariants.add(translation);
     }
@@ -51,6 +50,9 @@ public class Translation extends Entity {
         return false;
     }
 
+    /**
+     * Immutable
+     */
     public class Variant {
         private final Phrase phrase;
 

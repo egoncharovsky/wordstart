@@ -12,4 +12,7 @@
     <string name="translate" translatable="true">Translate</string>
     <string name="enter_here">Enter here...</string>
     <string name="create_card">Save translate to cards</string>
+
+    <string name="language_russian" translatable="true">Russian</string>
+    <string name="language_english" translatable="true">English</string>
 </resources>

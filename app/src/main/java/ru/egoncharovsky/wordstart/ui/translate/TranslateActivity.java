@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 import ru.egoncharovsky.wordstart.R;
 import ru.egoncharovsky.wordstart.ui.BaseActivity;
+import ru.egoncharovsky.wordstart.ui.EnumAdapter;
 import ru.egoncharovsky.wordstart.ui.ModelView;
 
 import java.util.ArrayList;
@@ -20,9 +21,17 @@ public class TranslateActivity extends BaseActivity implements ModelView<Transla
 
     private TranslateController controller;
 
+    private Spinner langFromChooser;
+    private Spinner langToChooser;
     private EditText inputTranslate;
+    private Button buttonTranslate;
     private ListView listTranslation;
+
     private HashMap<ImageView, TranslateModel.TranslationItem> buttonItemMap;
+
+    private EnumAdapter<TranslateModel.TranslateLanguage> langFromAdapter;
+    private EnumAdapter<TranslateModel.TranslateLanguage> langToAdapter;
+
 
     @Override
     public int getActivityViewId() {
@@ -41,6 +50,40 @@ public class TranslateActivity extends BaseActivity implements ModelView<Transla
         inputTranslate = findViewById(R.id.input_translate);
         listTranslation = findViewById(R.id.list_translation_words);
 
+        langFromChooser = findViewById(R.id.spinner_translate_from);
+        langFromChooser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                controller.onFromLanguageSelected(langFromAdapter.get(position));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        langFromAdapter = new EnumAdapter<>(
+                this, R.layout.list_item_translate_language, TranslateModel.TranslateLanguage.values());
+        langFromChooser.setAdapter(langFromAdapter);
+
+        langToChooser = findViewById(R.id.spinner_translate_to);
+        langToChooser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                controller.onToLanguageSelected(langToAdapter.get(position));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        langToAdapter = new EnumAdapter<>(
+                this, R.layout.list_item_translate_language, TranslateModel.TranslateLanguage.values());
+        langToChooser.setAdapter(langToAdapter);
+
+        buttonTranslate = findViewById(R.id.button_translate);
+
         update(model);
     }
 
@@ -50,6 +93,16 @@ public class TranslateActivity extends BaseActivity implements ModelView<Transla
 
         inputTranslate.setText(model.getTranslatedText());
         listTranslation.setAdapter(translationWordsAdapter(model.getItems()));
+
+        if (model.getFrom() != null) {
+            langFromChooser.setSelection(langFromAdapter.position(model.getFrom()));
+        }
+
+        if (model.getTo() != null) {
+            langToChooser.setSelection(langToAdapter.position(model.getTo()));
+        }
+
+        buttonTranslate.setEnabled(!Objects.equals(model.getFrom(), model.getTo()));
     }
 
     public void onTranslate(View view) {
@@ -64,6 +117,10 @@ public class TranslateActivity extends BaseActivity implements ModelView<Transla
         TranslateModel.TranslationItem item = getClickedItem(view);
 
         controller.onCreateCard(item);
+    }
+
+    public void onSwapLanguage(View view) {
+        controller.onSwapLanguage();
     }
 
     private String getTranslateInput() {
