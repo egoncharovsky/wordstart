@@ -5,13 +5,8 @@ public interface CardsDictionaryController {
 
     void onBackToNormalMode();
 
-    ItemActions multiSelect();
+    CardsListActionsHandler.CardsListActions multiSelect();
 
-    ItemActions normalSelect();
+    CardsListActionsHandler.CardsListActions normalSelect();
 
-    interface ItemActions {
-        void onItemClick(CardsDictionaryModel.Item item);
-
-        void onItemLongClick(CardsDictionaryModel.Item item);
-    }
 }

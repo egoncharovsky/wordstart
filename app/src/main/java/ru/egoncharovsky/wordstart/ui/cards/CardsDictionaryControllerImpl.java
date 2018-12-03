@@ -8,24 +8,24 @@ public class CardsDictionaryControllerImpl implements CardsDictionaryController 
 
     private LearningCardsService cardsService = new LearningCardsService(new LearningCardRepositoryImpl());
 
-    private ModelView<CardsDictionaryModel> view;
-    private CardsDictionaryModel model;
+    private ModelView<CardsList> view;
+    private CardsList model;
 
-    public CardsDictionaryControllerImpl(ModelView<CardsDictionaryModel> view) {
+    public CardsDictionaryControllerImpl(ModelView<CardsList> view) {
         this.view = view;
 
-        model = new CardsDictionaryModel(cardsService.getAll());
+        model = new CardsList(cardsService.getAll());
 
         view.init(model);
     }
 
     @Override
     public void onDeleteCards() {
-        for (CardsDictionaryModel.Item item : model.getSelected()) {
+        for (CardsList.Item item : model.getSelected()) {
             cardsService.delete(item.getCardId());
         }
 
-        model = new CardsDictionaryModel(cardsService.getAll());
+        model = new CardsList(cardsService.getAll());
         view.update(model);
     }
 
@@ -36,16 +36,16 @@ public class CardsDictionaryControllerImpl implements CardsDictionaryController 
     }
 
     @Override
-    public ItemActions multiSelect() {
-        return new ItemActions() {
+    public CardsListActionsHandler.CardsListActions multiSelect() {
+        return new CardsListActionsHandler.CardsListActions() {
             @Override
-            public void onItemClick(CardsDictionaryModel.Item item) {
+            public void onItemClick(CardsList.Item item) {
                 model.toggleSelect(item);
                 view.update(model);
             }
 
             @Override
-            public void onItemLongClick(CardsDictionaryModel.Item item) {
+            public void onItemLongClick(CardsList.Item item) {
                 model.toggleSelect(item);
                 view.update(model);
             }
@@ -53,15 +53,15 @@ public class CardsDictionaryControllerImpl implements CardsDictionaryController 
     }
 
     @Override
-    public ItemActions normalSelect() {
-        return new ItemActions() {
+    public CardsListActionsHandler.CardsListActions normalSelect() {
+        return new CardsListActionsHandler.CardsListActions() {
             @Override
-            public void onItemClick(CardsDictionaryModel.Item item) {
+            public void onItemClick(CardsList.Item item) {
 
             }
 
             @Override
-            public void onItemLongClick(CardsDictionaryModel.Item item) {
+            public void onItemLongClick(CardsList.Item item) {
                 model.toggleSelect(item);
                 view.update(model);
             }

@@ -24,4 +24,7 @@
 
     <string name="edit_card_enter_original">Enter original...</string>
     <string name="edit_card_enter_translation">Enter translation...</string>
+
+    <string name="edit_pack_enter_name">Name...</string>
+    <string name="edit_pack_cards_total">Cards: </string>
 </resources>

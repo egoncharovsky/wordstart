@@ -4,11 +4,11 @@ import ru.egoncharovsky.wordstart.domain.card.LearningCard;
 
 import java.util.*;
 
-public class CardsDictionaryModel {
+public class CardsList {
     private final List<Item> cards = new LinkedList<>();
     private final Set<Item> selected = new HashSet<>();
 
-    public CardsDictionaryModel(List<LearningCard> cards) {
+    public CardsList(List<LearningCard> cards) {
         for (LearningCard card : cards) {
             this.cards.add(new Item(card));
         }
