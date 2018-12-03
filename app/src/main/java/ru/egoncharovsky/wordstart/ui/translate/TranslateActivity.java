@@ -10,7 +10,6 @@ import ru.egoncharovsky.wordstart.R;
 import ru.egoncharovsky.wordstart.ui.BaseActivity;
 import ru.egoncharovsky.wordstart.ui.EnumAdapter;
 import ru.egoncharovsky.wordstart.ui.ModelView;
-import ru.egoncharovsky.wordstart.ui.shared.TranslateLanguage;
 
 import java.util.ArrayList;
 import java.util.HashMap;

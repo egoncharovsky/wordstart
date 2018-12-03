@@ -3,7 +3,6 @@ package ru.egoncharovsky.wordstart.ui.translate;
 import ru.egoncharovsky.wordstart.domain.card.LearningCard;
 import ru.egoncharovsky.wordstart.domain.word.Phrase;
 import ru.egoncharovsky.wordstart.domain.word.Translation;
-import ru.egoncharovsky.wordstart.ui.shared.TranslateLanguage;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;

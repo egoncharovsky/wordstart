@@ -5,7 +5,7 @@ import ru.egoncharovsky.wordstart.domain.card.LearningCardsService;
 import ru.egoncharovsky.wordstart.domain.word.Phrase;
 import ru.egoncharovsky.wordstart.repository.LearningCardRepositoryImpl;
 import ru.egoncharovsky.wordstart.ui.ModelView;
-import ru.egoncharovsky.wordstart.ui.shared.TranslateLanguage;
+import ru.egoncharovsky.wordstart.ui.translate.TranslateLanguage;
 
 public class EditCardControllerImpl implements EditCardController {
 

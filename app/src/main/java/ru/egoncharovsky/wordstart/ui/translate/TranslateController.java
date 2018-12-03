@@ -1,7 +1,5 @@
 package ru.egoncharovsky.wordstart.ui.translate;
 
-import ru.egoncharovsky.wordstart.ui.shared.TranslateLanguage;
-
 public interface TranslateController {
     void onTranslate(String input);
 

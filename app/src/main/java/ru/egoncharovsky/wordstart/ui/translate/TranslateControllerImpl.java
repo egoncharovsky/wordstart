@@ -8,7 +8,6 @@ import ru.egoncharovsky.wordstart.domain.word.TranslationService;
 import ru.egoncharovsky.wordstart.external.translate.glosbe.GlosbeService;
 import ru.egoncharovsky.wordstart.repository.LearningCardRepositoryImpl;
 import ru.egoncharovsky.wordstart.ui.ModelView;
-import ru.egoncharovsky.wordstart.ui.shared.TranslateLanguage;
 
 import java.util.HashSet;
 import java.util.Set;

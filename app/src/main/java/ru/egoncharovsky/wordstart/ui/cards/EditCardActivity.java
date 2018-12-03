@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import ru.egoncharovsky.wordstart.R;
 import ru.egoncharovsky.wordstart.ui.*;
-import ru.egoncharovsky.wordstart.ui.shared.TranslateLanguage;
+import ru.egoncharovsky.wordstart.ui.translate.TranslateLanguage;
 
 public class EditCardActivity extends BaseActivity implements ModelView<Void> {
 

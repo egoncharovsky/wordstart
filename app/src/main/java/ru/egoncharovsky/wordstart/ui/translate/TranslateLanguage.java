@@ -1,4 +1,4 @@
-package ru.egoncharovsky.wordstart.ui.shared;
+package ru.egoncharovsky.wordstart.ui.translate;
 
 import ru.egoncharovsky.wordstart.R;
 import ru.egoncharovsky.wordstart.domain.word.Language;
