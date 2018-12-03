@@ -87,7 +87,7 @@ public class EditCardActivity extends BaseActivity implements ModelView<Void> {
             public void onClick(View v) {
                 controller.onSave(inputOf(phraseOriginal), originalLanguage.getSelected(),
                         inputOf(phraseTranslation), translationLanguage.getSelected());
-                switchActivityTo(CardsDictionaryActivity.class);
+                finish();
             }
         });
         save.setEnabled(false);

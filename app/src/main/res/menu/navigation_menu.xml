@@ -10,6 +10,9 @@
         <item
                 android:id="@+id/nav_translate"
                 android:title="@string/translator"/>
+        <item
+                android:id="@+id/nav_tmp_create_pack"
+                android:title="@string/packs_editor"/>
         <!--<item
                 android:id="@+id/nav_gallery"
                 android:icon="@drawable/ic_menu_gallery"

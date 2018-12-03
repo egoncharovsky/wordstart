@@ -10,6 +10,7 @@
     <string name="cards_dictionary" translatable="true">Cards</string>
     <string name="translator" translatable="true">Translate</string>
     <string name="cards_editor" translatable="true">Card edit</string>
+    <string name="packs_editor" translatable="true">Pack edit</string>
 
     <string name="translate" translatable="true">Translate</string>
     <string name="enter_here">Enter here...</string>
@@ -26,5 +27,5 @@
     <string name="edit_card_enter_translation">Enter translation...</string>
 
     <string name="edit_pack_enter_name">Name...</string>
-    <string name="edit_pack_cards_total">Cards: </string>
+    <string name="edit_pack_cards_total">Cards total: %d</string>
 </resources>

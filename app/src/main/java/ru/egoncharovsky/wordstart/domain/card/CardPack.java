@@ -14,9 +14,9 @@ public class CardPack extends Entity {
     private final Set<LearningCard> cards;
 
     public CardPack(String name, Collection<LearningCard> cards) {
-        Objects.requireNonNull(name);
+        if (name == null) throw new IllegalArgumentException("Card pack name must be not null");
         this.name = name;
-        this.cards = new HashSet<>();
+        this.cards = new HashSet<>(cards);
     }
 
     public String getName() {

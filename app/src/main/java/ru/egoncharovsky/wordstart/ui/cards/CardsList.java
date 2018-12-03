@@ -8,6 +8,10 @@ public class CardsList {
     private final List<Item> cards = new LinkedList<>();
     private final Set<Item> selected = new HashSet<>();
 
+    public CardsList() {
+
+    }
+
     public CardsList(List<LearningCard> cards) {
         for (LearningCard card : cards) {
             this.cards.add(new Item(card));
@@ -24,6 +28,10 @@ public class CardsList {
 
     public boolean hasSelected() {
         return !selected.isEmpty();
+    }
+
+    public int size() {
+        return cards.size();
     }
 
     public List<Item> getCards() {

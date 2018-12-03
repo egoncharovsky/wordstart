@@ -31,7 +31,10 @@
                 android:name=".ui.cards.EditCardActivity"
                 android:label="@string/cards_editor"
                 android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".ui.pack.EditCardsPackActivity"/>
+        <activity
+                android:name=".ui.pack.EditCardsPackActivity"
+                android:label="@string/packs_editor"
+                android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

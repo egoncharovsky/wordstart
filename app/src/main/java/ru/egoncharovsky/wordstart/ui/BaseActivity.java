@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import ru.egoncharovsky.wordstart.R;
 import ru.egoncharovsky.wordstart.ui.cards.CardsDictionaryActivity;
+import ru.egoncharovsky.wordstart.ui.pack.EditCardsPackActivity;
 import ru.egoncharovsky.wordstart.ui.translate.TranslateActivity;
 
 public abstract class BaseActivity extends AppCompatActivity
@@ -65,6 +66,9 @@ public abstract class BaseActivity extends AppCompatActivity
             case R.id.nav_translate:
                 switchActivityTo(TranslateActivity.class);
                 break;
+            case R.id.nav_tmp_create_pack:
+                switchActivityTo(EditCardsPackActivity.class);
+                break;
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -89,7 +93,7 @@ public abstract class BaseActivity extends AppCompatActivity
         }
     }
 
-    protected String inputOf(EditText editText) {
+    protected String inputOf(EditText editText) {//todo move to edit text wrapper?
         Editable text = editText.getText();
         if (text != null) {
             return text.toString();
