@@ -29,7 +29,8 @@
 
     <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:id="@+id/list_edit_pack_cards"
             android:choiceMode="multipleChoice"
             android:clickable="false"
@@ -37,7 +38,6 @@
             android:paddingBottom="20dp"
             android:background="@drawable/bordered"/>
 
-    <!--todo make visible buttons-->
     <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
