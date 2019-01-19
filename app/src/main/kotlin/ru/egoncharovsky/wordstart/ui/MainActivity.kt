@@ -23,9 +23,19 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
+class MainActivityContent : BaseComponent<MainActivity>() {
+    override fun <T> AnkoContext<T>.content(ui: AnkoContext<T>): View {
+        return verticalLayout {
+            textView("Hello!")
+        }
+    }
+}
 
-class MainActivityContent : AnkoComponent<MainActivity> {
-    override fun createView(ui: AnkoContext<MainActivity>): View = with(ui) {
+abstract class BaseComponent<T> : AnkoComponent<T> {
+
+    abstract fun <T> AnkoContext<T>.content(ui: AnkoContext<T>): View
+
+    override fun createView(ui: AnkoContext<T>): View = with(ui) {
         drawerLayout {
             fitsSystemWindows = true
 
@@ -33,7 +43,6 @@ class MainActivityContent : AnkoComponent<MainActivity> {
                 //                fitsSystemWindows = true
 
                 themedAppBarLayout(R.style.AppTheme_AppBarOverlay) {
-                    //
                     toolbar {
                         lparams(width = matchParent, height = matchParent)
                         popupTheme = R.style.AppTheme_PopupOverlay
@@ -42,13 +51,12 @@ class MainActivityContent : AnkoComponent<MainActivity> {
                     }
                 }.lparams(width = matchParent, height = wrapContent)
 
-                relativeLayout {
-                    horizontalPadding = dimen(R.dimen.activity_horizontal_margin)
-                    verticalPadding = dimen(R.dimen.activity_vertical_margin)
-
-                    textView("Hello World!")
-                }.lparams(width = matchParent, height = matchParent) {
-                    behavior = AppBarLayout.ScrollingViewBehavior()
+                with(AnkoContext.createDelegate(
+                        relativeLayout().lparams(width = matchParent, height = matchParent) {
+                            behavior = AppBarLayout.ScrollingViewBehavior()
+                        }
+                )) {
+                    content(ui)
                 }
             }.lparams(width = matchParent, height = matchParent)
 
@@ -81,9 +89,3 @@ class MainActivityContent : AnkoComponent<MainActivity> {
         }
     }
 }
-
-//
-//
-//
-//
-//
