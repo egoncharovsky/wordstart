@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Gravity
+import android.view.Menu
 import android.view.View
 import android.widget.LinearLayout
 import org.jetbrains.anko.*
@@ -21,7 +22,7 @@ import ru.egoncharovsky.wordstart.R
 abstract class BaseAnkoActivity : AppCompatActivity(), AnkoComponent<BaseAnkoActivity> {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        object : AppToolbarAndMenuDecorator<BaseAnkoActivity>() {
+        object : ToolbarAndMenuDecorator<BaseAnkoActivity>() {
             override fun <T> AnkoContext<T>.content(ui: AnkoContext<T>): View = component(ui)
         }.setContentView(this)
 
@@ -41,7 +42,7 @@ abstract class BaseAnkoActivity : AppCompatActivity(), AnkoComponent<BaseAnkoAct
         component(ui)
     }
 
-    private abstract class AppToolbarAndMenuDecorator<T> : AnkoComponent<T> {
+    private abstract class ToolbarAndMenuDecorator<T> : AnkoComponent<T> {
 
         abstract fun <T> AnkoContext<T>.content(ui: AnkoContext<T>): View
 
@@ -73,24 +74,33 @@ abstract class BaseAnkoActivity : AppCompatActivity(), AnkoComponent<BaseAnkoAct
                 navigationView {
                     fitsSystemWindows = true
 
-                    verticalLayout {
-                        lparams(R.style.ThemeOverlay_AppCompat_Dark)
-                        backgroundResource = R.drawable.side_nav_bar
-                        gravity = Gravity.BOTTOM
-                        orientation = LinearLayout.VERTICAL
-                        padding = dip(20)
+                    addHeaderView(with(AnkoContext.create(ctx, this)) {
+                        verticalLayout {
+                            lparams(R.style.ThemeOverlay_AppCompat_Dark)
+                            backgroundResource = R.drawable.side_nav_bar
+                            gravity = Gravity.BOTTOM
+                            orientation = LinearLayout.VERTICAL
+                            padding = dip(20)
 
-                        imageView(R.mipmap.ic_launcher_round) {
-                            padding = dip(5)
-                        }.lparams(width = wrapContent, height = wrapContent)
+                            imageView(R.mipmap.ic_launcher_round) {
+                                padding = dip(5)
+                            }.lparams(width = wrapContent, height = wrapContent)
 
-                        textView(R.string.nav_header_title) {
-                            padding = R.dimen.nav_header_vertical_spacing
-                        }.lparams(width = matchParent, height = wrapContent)
+                            textView(R.string.nav_header_title) {
+                                padding = R.dimen.nav_header_vertical_spacing
+                            }.lparams(width = matchParent, height = wrapContent)
 
-                        textView(R.string.nav_header_subtitle) {
-                            textColor = Color.WHITE
-                        }.lparams(width = wrapContent, height = wrapContent)
+                            textView(R.string.nav_header_subtitle) {
+                                textColor = Color.WHITE
+                            }.lparams(width = wrapContent, height = wrapContent)
+                        }
+                    })
+
+                    menu.apply {
+                        add(1, 1, Menu.NONE, "first")
+                        add(1, 2, Menu.NONE, "second")
+                        add(2, 1, Menu.NONE, "2_first")
+                        add(2, 2, Menu.NONE, "2_second")
                     }
 
                 }.lparams(height = matchParent) {
