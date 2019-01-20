@@ -23,7 +23,7 @@ abstract class BaseAnkoActivity : AppCompatActivity(), AnkoComponent<BaseAnkoAct
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         object : ToolbarAndMenuDecorator<BaseAnkoActivity>() {
-            override fun <T> AnkoContext<T>.content(ui: AnkoContext<T>): View = component(ui)
+            override fun <T> AnkoContext<T>.inner(ui: AnkoContext<T>): View = content(ui)
         }.setContentView(this)
 
         val toolbar = findOptional<Toolbar>(R.id.toolbar)
@@ -36,15 +36,15 @@ abstract class BaseAnkoActivity : AppCompatActivity(), AnkoComponent<BaseAnkoAct
         toggle.syncState()
     }
 
-    abstract fun <T> AnkoContext<T>.component(ui: AnkoContext<T>): View
+    abstract fun <T> AnkoContext<T>.content(ui: AnkoContext<T>): View
 
     override fun createView(ui: AnkoContext<BaseAnkoActivity>): View = with(ui) {
-        component(ui)
+        content(ui)
     }
 
     private abstract class ToolbarAndMenuDecorator<T> : AnkoComponent<T> {
 
-        abstract fun <T> AnkoContext<T>.content(ui: AnkoContext<T>): View
+        abstract fun <T> AnkoContext<T>.inner(ui: AnkoContext<T>): View
 
         override fun createView(ui: AnkoContext<T>): View = with(ui) {
             drawerLayout {
@@ -67,7 +67,7 @@ abstract class BaseAnkoActivity : AppCompatActivity(), AnkoComponent<BaseAnkoAct
                                 behavior = AppBarLayout.ScrollingViewBehavior()
                             }
                     )) {
-                        content(ui)
+                        inner(ui)
                     }
                 }.lparams(width = matchParent, height = matchParent)
 

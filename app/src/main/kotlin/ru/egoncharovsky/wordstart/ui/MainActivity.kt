@@ -7,7 +7,7 @@ import org.jetbrains.anko.verticalLayout
 
 class MainActivity : BaseAnkoActivity() {
 
-    override fun <T> AnkoContext<T>.component(ui: AnkoContext<T>): View {
+    override fun <T> AnkoContext<T>.content(ui: AnkoContext<T>): View {
         return verticalLayout {
             textView("Hello all now!")
         }
