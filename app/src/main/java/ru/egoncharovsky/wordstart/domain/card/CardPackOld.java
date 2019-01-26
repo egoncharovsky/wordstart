@@ -7,13 +7,14 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class CardPack extends Entity {
+@Deprecated
+public class CardPackOld extends Entity {
 
     private String name;
 
     private final Set<LearningCard> cards;
 
-    public CardPack(String name, Collection<LearningCard> cards) {
+    public CardPackOld(String name, Collection<LearningCard> cards) {
         if (name == null) throw new IllegalArgumentException("Card pack name must be not null");
         this.name = name;
         this.cards = new HashSet<>(cards);

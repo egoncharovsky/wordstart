@@ -1,6 +1,6 @@
 package ru.egoncharovsky.wordstart.ui.pack;
 
-import ru.egoncharovsky.wordstart.domain.card.CardPack;
+import ru.egoncharovsky.wordstart.domain.card.CardPackOld;
 import ru.egoncharovsky.wordstart.domain.card.LearningCard;
 import ru.egoncharovsky.wordstart.domain.word.Language;
 import ru.egoncharovsky.wordstart.domain.word.Phrase;
@@ -16,7 +16,7 @@ public class EditCardsControllerImpl implements EditCardsController {
     public EditCardsControllerImpl(ModelView<EditCardsPackModel> view) {
         this.view = view;
 
-        model = new EditCardsPackModel(new CardPack("pack", new ArrayList<LearningCard>() {{
+        model = new EditCardsPackModel(new CardPackOld("pack", new ArrayList<LearningCard>() {{
             add(new LearningCard(
                     new Phrase("phrase", Language.EN),
                     new Phrase("фраза", Language.RU)));

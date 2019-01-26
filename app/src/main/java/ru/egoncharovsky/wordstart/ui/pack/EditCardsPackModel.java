@@ -1,6 +1,6 @@
 package ru.egoncharovsky.wordstart.ui.pack;
 
-import ru.egoncharovsky.wordstart.domain.card.CardPack;
+import ru.egoncharovsky.wordstart.domain.card.CardPackOld;
 import ru.egoncharovsky.wordstart.ui.cards.CardsList;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class EditCardsPackModel {
         this.cardsList = new CardsList();
     }
 
-    public EditCardsPackModel(CardPack pack) {
+    public EditCardsPackModel(CardPackOld pack) {
         this.packName = pack.getName();
         this.cardsList = new CardsList(new ArrayList<>(pack.getCards()));
     }

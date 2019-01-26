@@ -20,7 +20,7 @@ public abstract class Entity implements Identifiable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Entity entity = (Entity) o;
-        return Objects.equals(getId(), entity.getId());
+        return getId() != null && getId().equals(entity.getId());
     }
 
     @Override
