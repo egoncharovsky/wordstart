@@ -13,6 +13,9 @@
         <item
                 android:id="@+id/nav_tmp_create_pack"
                 android:title="@string/packs_editor"/>
+        <item
+                android:id="@+id/nav_card_packs"
+                android:title="@string/card_packs"/>
         <!--<item
                 android:id="@+id/nav_gallery"
                 android:icon="@drawable/ic_menu_gallery"

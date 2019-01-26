@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import ru.egoncharovsky.wordstart.R;
 import ru.egoncharovsky.wordstart.ui.cards.CardsDictionaryActivity;
+import ru.egoncharovsky.wordstart.ui.pack.CardPacksActivity;
 import ru.egoncharovsky.wordstart.ui.pack.EditCardsPackActivity;
 import ru.egoncharovsky.wordstart.ui.translate.TranslateActivity;
 
@@ -68,6 +69,9 @@ public abstract class BaseActivity extends AppCompatActivity
                 break;
             case R.id.nav_tmp_create_pack:
                 switchActivityTo(EditCardsPackActivity.class);
+                break;
+            case R.id.nav_card_packs:
+                switchActivityTo(CardPacksActivity.class);
                 break;
         }
 
