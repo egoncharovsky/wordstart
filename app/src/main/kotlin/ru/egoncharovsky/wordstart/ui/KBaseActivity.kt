@@ -14,6 +14,7 @@ import android.widget.EditText
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.app_side_menu.*
 import kotlinx.android.synthetic.main.app_top_toolbar.*
+import ru.egoncharovsky.wordstart.R
 import ru.egoncharovsky.wordstart.ui.cards.CardsDictionaryActivity
 import ru.egoncharovsky.wordstart.ui.pack.CardPacksActivity
 import ru.egoncharovsky.wordstart.ui.pack.EditCardsPackActivity
