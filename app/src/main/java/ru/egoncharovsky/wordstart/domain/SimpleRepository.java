@@ -2,7 +2,7 @@ package ru.egoncharovsky.wordstart.domain;
 
 import java.util.List;
 
-public interface SimpleRepository<I extends Identifiable> {
+public interface SimpleRepository<I extends IdentifiableOld> {
 
     I insert(I item);
 

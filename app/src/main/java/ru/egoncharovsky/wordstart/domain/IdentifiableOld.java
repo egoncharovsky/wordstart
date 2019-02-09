@@ -1,6 +1,7 @@
 package ru.egoncharovsky.wordstart.domain;
 
-public interface Identifiable {
+@Deprecated
+public interface IdentifiableOld {
 
     Long getId();
 }
