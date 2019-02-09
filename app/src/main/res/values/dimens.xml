@@ -10,5 +10,5 @@
     <dimen name="list_item_top_margin">1dp</dimen>
     <dimen name="list_item_bottom_margin">1dp</dimen>
 
-    <dimen name="content_padding">2dp</dimen>
+    <dimen name="content_padding">8dp</dimen>
 </resources>

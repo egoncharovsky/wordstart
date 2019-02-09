@@ -7,6 +7,7 @@
     <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="90dp"
+            android:background="@color/list_item_normal_state"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 

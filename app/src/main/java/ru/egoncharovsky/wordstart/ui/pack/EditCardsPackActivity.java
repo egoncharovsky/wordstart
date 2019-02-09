@@ -18,6 +18,8 @@ import ru.egoncharovsky.wordstart.ui.cards.CardsListView;
 
 public class EditCardsPackActivity extends BaseActivity implements ModelView<EditCardsPackModel> {
 
+    public static String CARD_PACK_NAME = "cardPack.name";
+
     private EditCardsController controller;
 
     private EditText packName;

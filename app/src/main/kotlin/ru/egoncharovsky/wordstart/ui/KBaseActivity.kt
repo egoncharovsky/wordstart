@@ -1,6 +1,7 @@
 package ru.egoncharovsky.wordstart.ui
 
 import android.os.Bundle
+import android.support.annotation.LayoutRes
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
@@ -16,6 +17,7 @@ import ru.egoncharovsky.wordstart.ui.translate.TranslateActivity
 
 abstract class KBaseActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    @LayoutRes
     abstract fun contentViewId(): Int
 
     override fun onCreate(savedInstanceState: Bundle?) {

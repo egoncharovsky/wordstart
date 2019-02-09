@@ -8,29 +8,37 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.card_packs.*
-
 import ru.egoncharovsky.wordstart.R
 import ru.egoncharovsky.wordstart.domain.card.CardPack
-import ru.egoncharovsky.wordstart.domain.card.LearningCard
-import ru.egoncharovsky.wordstart.domain.word.Language
-import ru.egoncharovsky.wordstart.domain.word.Phrase
+import ru.egoncharovsky.wordstart.repository.CardPackRepository
 import ru.egoncharovsky.wordstart.ui.KBaseActivity
+import ru.egoncharovsky.wordstart.ui.RecyclerItemClickListener
+import ru.egoncharovsky.wordstart.ui.switchActivityTo
 
 class CardPacksActivity : KBaseActivity() {
+
     override fun contentViewId(): Int = R.layout.card_packs
 
-    val cards = listOf(
-            CardPack("pack1", setOf(
-                    LearningCard(Phrase("word", Language.EN), Phrase("слово", Language.RU)),
-                    LearningCard(Phrase("word2", Language.EN), Phrase("слово2", Language.RU))
-            ))
-    )
+    private val cardPackRepo = CardPackRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        list_card_packs.adapter = CardPackAdapter(cards)
+        val adapter = CardPackAdapter(cardPackRepo.getAll().toList())
+
+        list_card_packs.adapter = adapter
         list_card_packs.layoutManager = LinearLayoutManager(this)
+
+        list_card_packs.addOnItemTouchListener(object : RecyclerItemClickListener(this, list_card_packs) {
+            override fun onItemClick(view: View?, position: Int) {
+                switchActivityTo(EditCardPackActivity::class.java, true,
+                        mapOf(EditCardPackActivity.CARD_PACK_ID to adapter.get(position).id()))
+            }
+
+            override fun onItemLongClick(view: View?, position: Int) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+        })
     }
 
     class CardPackAdapter(private val items: List<CardPack>) : RecyclerView.Adapter<CardPackAdapter.CardPackView>() {
@@ -53,5 +61,8 @@ class CardPacksActivity : KBaseActivity() {
             holder.cardsCount.text = cardPack.cards.size.toString()
         }
 
+        fun get(position: Int): CardPack {
+            return items[position]
+        }
     }
 }
