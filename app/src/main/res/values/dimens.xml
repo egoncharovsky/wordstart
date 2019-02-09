@@ -11,4 +11,5 @@
     <dimen name="list_item_bottom_margin">1dp</dimen>
 
     <dimen name="content_padding">8dp</dimen>
+    <dimen name="card_view_space">2dp</dimen>
 </resources>

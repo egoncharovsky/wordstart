@@ -39,7 +39,6 @@ abstract class KBaseActivity : AppCompatActivity(), NavigationView.OnNavigationI
         when (item.itemId) {
             R.id.nav_cards_dictionary -> switchActivityTo(CardsDictionaryActivity::class.java)
             R.id.nav_translate -> switchActivityTo(TranslateActivity::class.java)
-            R.id.nav_tmp_create_pack -> switchActivityTo(EditCardsPackActivity::class.java)
             R.id.nav_card_packs -> switchActivityTo(CardPacksActivity::class.java)
         }
 

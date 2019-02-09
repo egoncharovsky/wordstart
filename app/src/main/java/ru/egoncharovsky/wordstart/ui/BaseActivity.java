@@ -67,9 +67,6 @@ public abstract class BaseActivity extends AppCompatActivity
             case R.id.nav_translate:
                 switchActivityTo(TranslateActivity.class);
                 break;
-            case R.id.nav_tmp_create_pack:
-                switchActivityTo(EditCardsPackActivity.class);
-                break;
             case R.id.nav_card_packs:
                 switchActivityTo(CardPacksActivity.class);
                 break;

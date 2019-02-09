@@ -23,6 +23,9 @@
 
     <string name="back" translatable="true">Back</string>
     <string name="save" translatable="true">Save</string>
+    <string name="edit" translatable="true">Edit</string>
+    <string name="cancel" translatable="true">Cancel</string>
+    <string name="select" translatable="true">Select</string>
 
     <string name="edit_card_enter_original">Enter original...</string>
     <string name="edit_card_enter_translation">Enter translation...</string>
