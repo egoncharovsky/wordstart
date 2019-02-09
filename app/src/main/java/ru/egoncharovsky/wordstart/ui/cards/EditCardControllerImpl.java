@@ -1,6 +1,6 @@
 package ru.egoncharovsky.wordstart.ui.cards;
 
-import ru.egoncharovsky.wordstart.domain.card.LearningCard;
+import ru.egoncharovsky.wordstart.domain.card.LearningCardOld;
 import ru.egoncharovsky.wordstart.domain.card.LearningCardsService;
 import ru.egoncharovsky.wordstart.domain.word.Phrase;
 import ru.egoncharovsky.wordstart.repository.LearningCardRepositoryImpl;
@@ -22,7 +22,7 @@ public class EditCardControllerImpl implements EditCardController {
     @Override
     public void onSave(String original, TranslateLanguage originalLanguage,
                        String translation, TranslateLanguage translationLanguage) {
-        LearningCard card = new LearningCard(
+        LearningCardOld card = new LearningCardOld(
                 new Phrase(original, originalLanguage.getValue()),
                 new Phrase(translation, translationLanguage.getValue())
         );

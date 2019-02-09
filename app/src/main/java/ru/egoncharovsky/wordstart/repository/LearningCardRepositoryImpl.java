@@ -1,7 +1,7 @@
 package ru.egoncharovsky.wordstart.repository;
 
 import android.annotation.SuppressLint;
-import ru.egoncharovsky.wordstart.domain.card.LearningCard;
+import ru.egoncharovsky.wordstart.domain.card.LearningCardOld;
 import ru.egoncharovsky.wordstart.domain.card.LearningCardRepository;
 import ru.egoncharovsky.wordstart.domain.word.Language;
 import ru.egoncharovsky.wordstart.domain.word.Phrase;
@@ -15,40 +15,40 @@ import java.util.Map;
 public class LearningCardRepositoryImpl implements LearningCardRepository {
 
     @SuppressLint("UseSparseArrays")
-    private static Map<Long, LearningCard> data = new HashMap<>();
+    private static Map<Long, LearningCardOld> data = new HashMap<>();
     private static Long counter = 0L;
     static {
-        insertStatic(new LearningCard(
+        insertStatic(new LearningCardOld(
                 new Phrase("word 2", Language.EN),
                 new Phrase("слово 2", Language.RU)));
-        insertStatic(new LearningCard(
+        insertStatic(new LearningCardOld(
                 new Phrase("word", Language.EN),
                 new Phrase("слово", Language.RU)));
     }
 
-    private static LearningCard insertStatic(LearningCard item) {
+    private static LearningCardOld insertStatic(LearningCardOld item) {
         item.setId(counter++);
         data.put(item.getId(), item);
         return item;
     }
 
     @Override
-    public LearningCard insert(LearningCard item) {
+    public LearningCardOld insert(LearningCardOld item) {
         return insertStatic(item);
     }
 
     @Override
-    public LearningCard get(Long id) {
+    public LearningCardOld get(Long id) {
         return data.get(id);
     }
 
     @Override
-    public List<LearningCard> getAll() {
+    public List<LearningCardOld> getAll() {
         return new ArrayList<>(data.values());
     }
 
     @Override
-    public LearningCard update(LearningCard item) {
+    public LearningCardOld update(LearningCardOld item) {
         if (item.getId() != null && data.containsKey(item.getId())) {
             data.put(item.getId(), item);
             return item;
@@ -63,9 +63,9 @@ public class LearningCardRepositoryImpl implements LearningCardRepository {
     }
 
     @Override
-    public List<LearningCard> findCardsFor(Translation translation) {
-        List<LearningCard> found = new ArrayList<>();
-        for (LearningCard card : data.values()) {
+    public List<LearningCardOld> findCardsFor(Translation translation) {
+        List<LearningCardOld> found = new ArrayList<>();
+        for (LearningCardOld card : data.values()) {
             if (card.containedInTranslation(translation)) {
                 found.add(card);
             }

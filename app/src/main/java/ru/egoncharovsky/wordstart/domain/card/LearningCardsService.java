@@ -14,15 +14,15 @@ public class LearningCardsService {
         this.repository = repository;
     }
 
-    public List<LearningCard> getAll() {
+    public List<LearningCardOld> getAll() {
         return repository.getAll();
     }
 
-    public List<LearningCard> getCardsFor(Translation translation) {
+    public List<LearningCardOld> getCardsFor(Translation translation) {
         return repository.findCardsFor(translation);
     }
 
-    public LearningCard save(LearningCard card) {
+    public LearningCardOld save(LearningCardOld card) {
         return repository.insert(card);
     }
 

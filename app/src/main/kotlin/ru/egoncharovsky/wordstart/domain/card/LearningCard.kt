@@ -1,12 +1,12 @@
 package ru.egoncharovsky.wordstart.domain.card
 
 import ru.egoncharovsky.wordstart.domain.Identifiable
+import ru.egoncharovsky.wordstart.domain.word.Phrase
 
-data class CardPack(
+data class LearningCard(
         val id: Long,
-        val name: String,
-        val cards: Set<LearningCard>
+        val front: Phrase,
+        val back: Phrase
 ) : Identifiable<Long> {
-
     override fun id(): Long = id
 }

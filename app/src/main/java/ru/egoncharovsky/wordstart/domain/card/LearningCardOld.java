@@ -7,13 +7,14 @@ import ru.egoncharovsky.wordstart.domain.word.Translation;
 /**
  * Immutable
  */
-public class LearningCard extends Entity {
+@Deprecated
+public class LearningCardOld extends Entity {
 
     private final Phrase originalPhrase;
 
     private final Phrase translationPhrase;
 
-    public LearningCard(Phrase originalPhrase, Phrase translationPhrase) {
+    public LearningCardOld(Phrase originalPhrase, Phrase translationPhrase) {
         if (originalPhrase.getLanguage().equals(translationPhrase.getLanguage()))
             throw new IllegalArgumentException("Translation language must differ to original");
 
@@ -21,8 +22,8 @@ public class LearningCard extends Entity {
         this.translationPhrase = translationPhrase;
     }
 
-    public LearningCard reverse() {
-        return new LearningCard(translationPhrase, originalPhrase);
+    public LearningCardOld reverse() {
+        return new LearningCardOld(translationPhrase, originalPhrase);
     }
 
     public Phrase getOriginalPhrase() {

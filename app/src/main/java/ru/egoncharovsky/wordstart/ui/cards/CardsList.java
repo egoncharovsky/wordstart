@@ -1,6 +1,6 @@
 package ru.egoncharovsky.wordstart.ui.cards;
 
-import ru.egoncharovsky.wordstart.domain.card.LearningCard;
+import ru.egoncharovsky.wordstart.domain.card.LearningCardOld;
 
 import java.util.*;
 
@@ -12,8 +12,8 @@ public class CardsList {
 
     }
 
-    public CardsList(List<LearningCard> cards) {
-        for (LearningCard card : cards) {
+    public CardsList(List<LearningCardOld> cards) {
+        for (LearningCardOld card : cards) {
             this.cards.add(new Item(card));
         }
     }
@@ -47,9 +47,9 @@ public class CardsList {
     }
 
     public class Item {
-        private final LearningCard card;
+        private final LearningCardOld card;
 
-        private Item(LearningCard card) {
+        private Item(LearningCardOld card) {
             this.card = card;
         }
 

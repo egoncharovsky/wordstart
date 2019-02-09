@@ -29,4 +29,6 @@
 
     <string name="edit_pack_enter_name">Name...</string>
     <string name="edit_pack_cards_total">Cards total: %d</string>
+    <string name="edit_pack_validation_err_name">Name must be not blank</string>
+
 </resources>

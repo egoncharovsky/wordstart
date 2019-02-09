@@ -1,6 +1,6 @@
 package ru.egoncharovsky.wordstart.ui.translate;
 
-import ru.egoncharovsky.wordstart.domain.card.LearningCard;
+import ru.egoncharovsky.wordstart.domain.card.LearningCardOld;
 import ru.egoncharovsky.wordstart.domain.word.Phrase;
 import ru.egoncharovsky.wordstart.domain.word.Translation;
 
@@ -26,7 +26,7 @@ class TranslateModel {
         items = new LinkedHashSet<>();
     }
 
-    public TranslateModel(Translation translation, Collection<LearningCard> cards) {
+    public TranslateModel(Translation translation, Collection<LearningCardOld> cards) {
         this(TranslateLanguage.from(translation.getOriginalLanguage()),
                 TranslateLanguage.from(translation.getTranslationLanguage()));
 
@@ -36,7 +36,7 @@ class TranslateModel {
             TranslationItem item = new TranslationItem(variant);
 
             if (cards != null) {
-                for (LearningCard card : cards) {
+                for (LearningCardOld card : cards) {
                     item.markIfRepresents(card);
                 }
             }
@@ -74,15 +74,15 @@ class TranslateModel {
             return phrase.getValue();
         }
 
-        public void markIfRepresents(LearningCard card) {
+        public void markIfRepresents(LearningCardOld card) {
             if (phrase.equals(card.getTranslationPhrase())) {
                 marked = true;
             }
         }
 
-        public LearningCard toCard() {
+        public LearningCardOld toCard() {
             marked = true;
-            return new LearningCard(translatedPhrase, phrase);
+            return new LearningCardOld(translatedPhrase, phrase);
         }
 
         public boolean isMarked() {

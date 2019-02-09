@@ -1,6 +1,6 @@
 package ru.egoncharovsky.wordstart.ui.translate;
 
-import ru.egoncharovsky.wordstart.domain.card.LearningCard;
+import ru.egoncharovsky.wordstart.domain.card.LearningCardOld;
 import ru.egoncharovsky.wordstart.domain.card.LearningCardsService;
 import ru.egoncharovsky.wordstart.domain.word.Phrase;
 import ru.egoncharovsky.wordstart.domain.word.Translation;
@@ -35,7 +35,7 @@ public class TranslateControllerImpl implements TranslateController {
 
         Translation translation = translationService.translate(phrase, model.getTo().getValue());
 
-        Set<LearningCard> cards = new HashSet<>(cardsService.getCardsFor(translation));
+        Set<LearningCardOld> cards = new HashSet<>(cardsService.getCardsFor(translation));
         model = new TranslateModel(translation, cards);
 
         view.update(model);
