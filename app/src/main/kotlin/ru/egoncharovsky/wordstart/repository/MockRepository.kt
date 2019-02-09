@@ -16,15 +16,15 @@ open class MockRepository<EntityType : Identifiable<IdentifierType>, IdentifierT
         when(store.contains(entity.id())) {
             true ->  throw IllegalArgumentException("Entity with id ${entity.id()} already persisted")
             false -> {
-                store[entity.id()] = entity
-                return get(entity.id())
+                store[entity.id()!!] = entity
+                return get(entity.id()!!)
             }
         }
     }
 
     fun update(entity: EntityType): EntityType {
-        store[entity.id()] = entity
-        return get(entity.id())
+        store[entity.id()!!] = entity
+        return get(entity.id()!!)
     }
 
     fun delete(id: IdentifierType) = store.remove(id)

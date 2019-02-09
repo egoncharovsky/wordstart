@@ -28,7 +28,7 @@ class CardPacksActivity : KBaseActivity() {
         list_card_packs.addOnItemTouchListener(object : RecyclerItemClickListener(this, list_card_packs) {
             override fun onItemClick(view: View?, position: Int) {
                 switchActivityTo(EditCardPackActivity::class.java, false,
-                        mapOf(EditCardPackActivity.CARD_PACK_ID to (list_card_packs.adapter as CardPackAdapter).get(position).id()))
+                        mapOf(EditCardPackActivity.CARD_PACK_ID to (list_card_packs.adapter as CardPackAdapter).get(position).id()!!))
             }
 
             override fun onItemLongClick(view: View?, position: Int) {

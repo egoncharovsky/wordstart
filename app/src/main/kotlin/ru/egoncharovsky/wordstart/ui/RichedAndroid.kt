@@ -3,6 +3,7 @@ package ru.egoncharovsky.wordstart.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Parcelable
+import android.support.v7.widget.RecyclerView
 import android.widget.EditText
 
 fun EditText.input(): String = this.text?.toString() ?: ""

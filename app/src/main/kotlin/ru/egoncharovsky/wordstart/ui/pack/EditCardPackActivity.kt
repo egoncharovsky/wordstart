@@ -32,6 +32,12 @@ class EditCardPackActivity : KBaseActivity() {
         super.onCreate(savedInstanceState)
 
         validation.addValidation(input_edit_pack_name, { it.isNotBlank() }, resources.getString(R.string.edit_pack_validation_err_name))
+        list_edit_pack_cards.layoutManager = LinearLayoutManager(this)
+        button_edit_pack_cancel.setOnClickListener { finish() }
+    }
+
+    override fun onStart() {
+        super.onStart()
 
         getExtra<Long>(CARD_PACK_ID)?.let {
             val cardPack = cardPackRepo.get(it)
@@ -39,16 +45,28 @@ class EditCardPackActivity : KBaseActivity() {
             input_edit_pack_name.setText(cardPack.name)
             text_edit_pack_cards_total.text = resources.getString(R.string.edit_pack_cards_total, cardPack.cards.size)
 
-            val adapter = CardPackAdapter(cardPack.cards.toList())
-            list_edit_pack_cards.adapter = adapter
-            list_edit_pack_cards.layoutManager = LinearLayoutManager(this)
+            list_edit_pack_cards.adapter = CardPackAdapter(cardPack.cards.toList())
 
-            button_edit_pack_cancel.setOnClickListener { finish() }
             button_edit_pack_save.setOnClickListener {
-                validation.validate()
-
-                cardPackRepo.update(CardPack(cardPack.id, input_edit_pack_name.input(), adapter.items.toSet()))
-                finish()
+                if (validation.validate()) {
+                    cardPackRepo.update(CardPack(
+                            cardPack.id,
+                            input_edit_pack_name.input(),
+                            (list_edit_pack_cards.adapter as CardPackAdapter).items.toSet()
+                    ))
+                    finish()
+                }
+            }
+        } ?: run {
+            button_edit_pack_save.setOnClickListener {
+                if (validation.validate()) {
+                    cardPackRepo.update(CardPack(
+                            null,
+                            input_edit_pack_name.input(),
+                            (list_edit_pack_cards.adapter as CardPackAdapter).items.toSet()
+                    ))
+                    finish()
+                }
             }
         }
     }
