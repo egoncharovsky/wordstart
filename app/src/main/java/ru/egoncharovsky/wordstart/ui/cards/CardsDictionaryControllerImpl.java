@@ -1,10 +1,7 @@
 package ru.egoncharovsky.wordstart.ui.cards;
 
 import ru.egoncharovsky.wordstart.domain.card.LearningCardOld;
-import ru.egoncharovsky.wordstart.domain.card.LearningCardsService;
-import ru.egoncharovsky.wordstart.repository.CardPackRepository;
 import ru.egoncharovsky.wordstart.repository.LearningCardRepository;
-import ru.egoncharovsky.wordstart.repository.LearningCardRepositoryImpl;
 import ru.egoncharovsky.wordstart.ui.ModelView;
 
 public class CardsDictionaryControllerImpl implements CardsDictionaryController {

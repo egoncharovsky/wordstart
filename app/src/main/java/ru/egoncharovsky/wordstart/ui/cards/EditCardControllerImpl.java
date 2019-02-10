@@ -1,9 +1,8 @@
 package ru.egoncharovsky.wordstart.ui.cards;
 
 import ru.egoncharovsky.wordstart.domain.card.LearningCardOld;
-import ru.egoncharovsky.wordstart.domain.card.LearningCardsService;
 import ru.egoncharovsky.wordstart.domain.word.Phrase;
-import ru.egoncharovsky.wordstart.repository.LearningCardRepositoryImpl;
+import ru.egoncharovsky.wordstart.repository.LearningCardRepository;
 import ru.egoncharovsky.wordstart.ui.ModelView;
 import ru.egoncharovsky.wordstart.ui.translate.TranslateLanguage;
 
@@ -11,7 +10,7 @@ public class EditCardControllerImpl implements EditCardController {
 
     private ModelView<Void> view;
 
-    private LearningCardsService cardsService = new LearningCardsService(new LearningCardRepositoryImpl());
+    private LearningCardRepository cardRepo = LearningCardRepository.INSTANCE;
 
     public EditCardControllerImpl(ModelView<Void> view) {
         this.view = view;
@@ -27,6 +26,6 @@ public class EditCardControllerImpl implements EditCardController {
                 new Phrase(translation, translationLanguage.getValue())
         );
 
-        cardsService.save(card);
+        cardRepo.create(card.toLearningCard());
     }
 }
