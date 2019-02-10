@@ -11,11 +11,11 @@ import kotlinx.android.synthetic.main.card_packs.*
 import ru.egoncharovsky.wordstart.R
 import ru.egoncharovsky.wordstart.domain.card.CardPack
 import ru.egoncharovsky.wordstart.repository.CardPackRepository
-import ru.egoncharovsky.wordstart.ui.KBaseActivity
+import ru.egoncharovsky.wordstart.ui.BaseActivity
 import ru.egoncharovsky.wordstart.ui.RecyclerItemClickListener
 import ru.egoncharovsky.wordstart.ui.switchActivityTo
 
-class CardPacksActivity : KBaseActivity() {
+class CardPacksActivity : BaseActivity() {
 
     override fun contentViewId(): Int = R.layout.card_packs
 

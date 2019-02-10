@@ -8,10 +8,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import ru.egoncharovsky.wordstart.R;
-import ru.egoncharovsky.wordstart.ui.BaseActivity;
+import ru.egoncharovsky.wordstart.ui.BaseActivityOld;
 import ru.egoncharovsky.wordstart.ui.ModelView;
 
-public class CardsDictionaryActivity extends BaseActivity implements ModelView<CardsList> {
+public class CardsDictionaryActivity extends BaseActivityOld implements ModelView<CardsList> {
 
     private CardsDictionaryController controller;
 

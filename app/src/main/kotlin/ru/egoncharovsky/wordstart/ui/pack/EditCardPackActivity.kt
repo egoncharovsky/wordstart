@@ -1,5 +1,7 @@
 package ru.egoncharovsky.wordstart.ui.pack
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -14,17 +16,21 @@ import ru.egoncharovsky.wordstart.R
 import ru.egoncharovsky.wordstart.domain.card.CardPack
 import ru.egoncharovsky.wordstart.domain.card.LearningCard
 import ru.egoncharovsky.wordstart.repository.CardPackRepository
-import ru.egoncharovsky.wordstart.ui.KBaseActivity
-import ru.egoncharovsky.wordstart.ui.getExtra
-import ru.egoncharovsky.wordstart.ui.input
+import ru.egoncharovsky.wordstart.repository.LearningCardRepository
+import ru.egoncharovsky.wordstart.ui.*
 
-class EditCardPackActivity : KBaseActivity() {
+class EditCardPackActivity : BaseActivity() {
     companion object {
         const val CARD_PACK_ID: String = "cardPack.id"
+
+        const val REQUEST_SELECT_CARDS = 1
     }
 
     private val cardPackRepo = CardPackRepository
+    private val cardRepo = LearningCardRepository
     private val validation = AwesomeValidation(ValidationStyle.BASIC)
+
+    private var editStarted = false
 
     override fun contentViewId(): Int = R.layout.edit_card_pack
 
@@ -34,44 +40,74 @@ class EditCardPackActivity : KBaseActivity() {
         validation.addValidation(input_edit_pack_name, { it.isNotBlank() }, resources.getString(R.string.edit_pack_validation_err_name))
         list_edit_pack_cards.layoutManager = LinearLayoutManager(this)
         button_edit_pack_cancel.setOnClickListener { finish() }
+
     }
 
     override fun onStart() {
         super.onStart()
 
-        getExtra<Long>(CARD_PACK_ID)?.let {
-            val cardPack = cardPackRepo.get(it)
+        if (!editStarted) {
+            getExtra<Long>(CARD_PACK_ID)?.let { id ->
+                val cardPack = cardPackRepo.get(id)
 
-            input_edit_pack_name.setText(cardPack.name)
-            text_edit_pack_cards_total.text = resources.getString(R.string.edit_pack_cards_total, cardPack.cards.size)
+                input_edit_pack_name.setText(cardPack.name)
 
-            list_edit_pack_cards.adapter = CardPackAdapter(cardPack.cards.toList())
+                list_edit_pack_cards.adapter = CardAdapter(cardPack.cards.toList())
 
-            button_edit_pack_save.setOnClickListener {
-                if (validation.validate()) {
-                    cardPackRepo.update(CardPack(
-                            cardPack.id,
-                            input_edit_pack_name.input(),
-                            (list_edit_pack_cards.adapter as CardPackAdapter).items.toSet()
-                    ))
-                    finish()
+                button_edit_pack_save.setOnClickListener {
+                    if (validation.validate()) {
+                        cardPackRepo.update(CardPack(
+                                cardPack.id,
+                                input_edit_pack_name.input(),
+                                (list_edit_pack_cards.adapter as CardAdapter).items.toSet()
+                        ))
+                        finish()
+                    }
+                }
+                button_edit_pack_select_cards.setOnClickListener {
+                    requestToActivity(CardPackSelectCardsActivity::class.java, REQUEST_SELECT_CARDS, mapOf(CARD_PACK_ID to id))
+                }
+            } ?: run {
+                button_edit_pack_save.setOnClickListener {
+                    if (validation.validate()) {
+                        cardPackRepo.create(CardPack(
+                                null,
+                                input_edit_pack_name.input(),
+                                (list_edit_pack_cards.adapter as CardAdapter).items.toSet()
+                        ))
+                        finish()
+                    }
+                }
+
+                button_edit_pack_select_cards.setOnClickListener {
+                    switchActivityTo(CardPackSelectCardsActivity::class.java)
                 }
             }
-        } ?: run {
-            button_edit_pack_save.setOnClickListener {
-                if (validation.validate()) {
-                    cardPackRepo.update(CardPack(
-                            null,
-                            input_edit_pack_name.input(),
-                            (list_edit_pack_cards.adapter as CardPackAdapter).items.toSet()
-                    ))
-                    finish()
+            editStarted = true
+        }
+
+        text_edit_pack_cards_total.text = resources.getString(R.string.edit_pack_cards_total, (list_edit_pack_cards.adapter as CardAdapter).items.size)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        editStarted = false
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        when (requestCode) {
+            REQUEST_SELECT_CARDS -> when (resultCode) {
+                Activity.RESULT_OK -> {
+                    val selectedCards = data!!.getExtra<LongArray>(CardPackSelectCardsActivity.CARD_IDS)!!.map { cardRepo.get(it) }
+                    list_edit_pack_cards.adapter = CardAdapter(selectedCards)
                 }
             }
         }
     }
 
-    class CardPackAdapter(val items: List<LearningCard>) : RecyclerView.Adapter<CardPackAdapter.LearningCardView>() {
+    class CardAdapter(val items: List<LearningCard>) : RecyclerView.Adapter<CardAdapter.LearningCardView>() {
 
         class LearningCardView(itemView: View) : RecyclerView.ViewHolder(itemView) {
             var mainText: TextView = itemView.findViewById(R.id.list_item_card_main_text)

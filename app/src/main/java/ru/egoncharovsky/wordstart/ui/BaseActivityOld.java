@@ -20,7 +20,7 @@ import ru.egoncharovsky.wordstart.ui.pack.CardPacksActivity;
 import ru.egoncharovsky.wordstart.ui.pack.EditCardsPackActivity;
 import ru.egoncharovsky.wordstart.ui.translate.TranslateActivity;
 
-public abstract class BaseActivity extends AppCompatActivity
+public abstract class BaseActivityOld extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     protected NavigationView menu;

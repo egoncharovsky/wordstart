@@ -4,11 +4,31 @@ import ru.egoncharovsky.wordstart.domain.Entity;
 import ru.egoncharovsky.wordstart.domain.word.Phrase;
 import ru.egoncharovsky.wordstart.domain.word.Translation;
 
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Immutable
  */
 @Deprecated
 public class LearningCardOld extends Entity {
+
+    public static LearningCardOld from(LearningCard card) {
+        return new LearningCardOld(card.component2(), card.component3());
+    }
+
+    public static List<LearningCardOld> from(Collection<LearningCard> cards) {
+        List<LearningCardOld> list = new LinkedList<>();
+        for (LearningCard card : cards) {
+            list.add(from(card));
+        }
+        return list;
+    }
+
+    public LearningCard toLearningCard() {
+        return new LearningCard(getId(), originalPhrase, translationPhrase);
+    }
 
     private final Phrase originalPhrase;
 

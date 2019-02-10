@@ -15,7 +15,7 @@ import ru.egoncharovsky.wordstart.ui.pack.CardPacksActivity
 import ru.egoncharovsky.wordstart.ui.pack.EditCardsPackActivity
 import ru.egoncharovsky.wordstart.ui.translate.TranslateActivity
 
-abstract class KBaseActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+abstract class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     @LayoutRes
     abstract fun contentViewId(): Int

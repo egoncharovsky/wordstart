@@ -39,6 +39,9 @@
                   android:label="@string/card_packs"
                   android:theme="@style/AppTheme.NoActionBar"
                 />
+        <activity android:name=".ui.pack.CardPackSelectCardsActivity"
+                  android:label="@string/card_pack_select_cards"
+                  android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

@@ -12,7 +12,7 @@ import ru.egoncharovsky.wordstart.R;
 import ru.egoncharovsky.wordstart.ui.*;
 import ru.egoncharovsky.wordstart.ui.translate.TranslateLanguage;
 
-public class EditCardActivity extends BaseActivity implements ModelView<Void> {
+public class EditCardActivity extends BaseActivityOld implements ModelView<Void> {
 
     private EditCardController controller;
 

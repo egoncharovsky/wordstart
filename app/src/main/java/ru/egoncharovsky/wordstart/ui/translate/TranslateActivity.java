@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import ru.egoncharovsky.wordstart.R;
-import ru.egoncharovsky.wordstart.ui.BaseActivity;
+import ru.egoncharovsky.wordstart.ui.BaseActivityOld;
 import ru.egoncharovsky.wordstart.ui.EnumAdapter;
 import ru.egoncharovsky.wordstart.ui.ModelView;
 
@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Set;
 
-public class TranslateActivity extends BaseActivity implements ModelView<TranslateModel> {
+public class TranslateActivity extends BaseActivityOld implements ModelView<TranslateModel> {
 
     private TranslateController controller;
 

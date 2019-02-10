@@ -9,14 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import ru.egoncharovsky.wordstart.R;
-import ru.egoncharovsky.wordstart.ui.BaseActivity;
+import ru.egoncharovsky.wordstart.ui.BaseActivityOld;
 import ru.egoncharovsky.wordstart.ui.EditFinishListner;
 import ru.egoncharovsky.wordstart.ui.ModelView;
 import ru.egoncharovsky.wordstart.ui.cards.CardsList;
 import ru.egoncharovsky.wordstart.ui.cards.CardsListActionsHandler;
 import ru.egoncharovsky.wordstart.ui.cards.CardsListView;
 
-public class EditCardsPackActivity extends BaseActivity implements ModelView<EditCardsPackModel> {
+public class EditCardsPackActivity extends BaseActivityOld implements ModelView<EditCardsPackModel> {
 
     public static String CARD_PACK_NAME = "cardPack.name";
 

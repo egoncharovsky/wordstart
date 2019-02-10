@@ -1,12 +1,15 @@
 package ru.egoncharovsky.wordstart.ui.cards;
 
+import ru.egoncharovsky.wordstart.domain.card.LearningCardOld;
 import ru.egoncharovsky.wordstart.domain.card.LearningCardsService;
+import ru.egoncharovsky.wordstart.repository.CardPackRepository;
+import ru.egoncharovsky.wordstart.repository.LearningCardRepository;
 import ru.egoncharovsky.wordstart.repository.LearningCardRepositoryImpl;
 import ru.egoncharovsky.wordstart.ui.ModelView;
 
 public class CardsDictionaryControllerImpl implements CardsDictionaryController {
 
-    private LearningCardsService cardsService = new LearningCardsService(new LearningCardRepositoryImpl());
+    private LearningCardRepository cardsRepo = LearningCardRepository.INSTANCE;
 
     private ModelView<CardsList> view;
     private CardsList model;
@@ -14,7 +17,7 @@ public class CardsDictionaryControllerImpl implements CardsDictionaryController 
     public CardsDictionaryControllerImpl(ModelView<CardsList> view) {
         this.view = view;
 
-        model = new CardsList(cardsService.getAll());
+        model = new CardsList(LearningCardOld.from(cardsRepo.getAll()));
 
         view.init(model);
     }
@@ -22,10 +25,10 @@ public class CardsDictionaryControllerImpl implements CardsDictionaryController 
     @Override
     public void onDeleteCards() {
         for (CardsList.Item item : model.getSelected()) {
-            cardsService.delete(item.getCardId());
+            cardsRepo.delete(item.getCardId());
         }
 
-        model = new CardsList(cardsService.getAll());
+        model = new CardsList(LearningCardOld.from(cardsRepo.getAll()));
         view.update(model);
     }
 
