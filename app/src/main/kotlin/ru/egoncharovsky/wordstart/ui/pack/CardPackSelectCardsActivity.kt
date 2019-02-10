@@ -10,7 +10,6 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.card_pack_select.*
 import ru.egoncharovsky.wordstart.R
 import ru.egoncharovsky.wordstart.domain.card.LearningCard
-import ru.egoncharovsky.wordstart.repository.CardPackRepository
 import ru.egoncharovsky.wordstart.repository.LearningCardRepository
 import ru.egoncharovsky.wordstart.ui.*
 
@@ -27,16 +26,14 @@ class CardPackSelectCardsActivity : BaseActivity() {
 
     private val selectedCards = mutableSetOf<Long>()
     private val mode = object : ActionModeCallback(this, R.menu.menu_select) {
-        override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
-            return when(item!!.itemId) {
-                R.id.action_delete -> {
-                    returnResult(mapOf(
-                            CARD_IDS to selectedCards.toLongArray()
-                    ))
-                    true
-                }
-                else -> false
+        override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean = when (item!!.itemId) {
+            R.id.action_delete -> {
+                returnResult(mapOf(
+                        CARD_IDS to selectedCards.toLongArray()
+                ))
+                true
             }
+            else -> false
         }
 
         override fun onDestroyActionMode(mode: ActionMode) {

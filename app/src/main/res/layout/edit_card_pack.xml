@@ -63,8 +63,6 @@
             android:padding="@dimen/content_padding"
             android:id="@+id/list_edit_pack_cards"
             android:choiceMode="multipleChoice"
-            android:clickable="false"
-            android:longClickable="true"
             android:background="@drawable/bordered"
             app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
             app:layout_constraintStart_toStartOf="parent"

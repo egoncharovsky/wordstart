@@ -10,6 +10,7 @@
             android:layout_width="fill_parent"
             android:layout_height="90dp"
             android:background="@color/list_item_normal_state"
+            android:id="@+id/list_item_card_pack_layout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 

@@ -1,5 +1,18 @@
 <resources>
     <string name="app_name" translatable="false">WordStart</string>
+
+    <string name="back" translatable="true">Back</string>
+    <string name="save" translatable="true">Save</string>
+    <string name="edit" translatable="true">Edit</string>
+    <string name="cancel" translatable="true">Cancel</string>
+    <string name="select" translatable="true">Select</string>
+    <string name="done" translatable="true">Done</string>
+    <string name="delete">Delete</string>
+    <string name="enter_here">Enter here…</string>
+
+    <string name="language_russian" translatable="true">Russian</string>
+    <string name="language_english" translatable="true">English</string>
+
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
     <string name="nav_header_title" translatable="false">WordStart</string>
@@ -15,25 +28,15 @@
     <string name="card_pack_select_cards" translatable="true">Select cards</string>
 
     <string name="translate" translatable="true">Translate</string>
-    <string name="enter_here">Enter here...</string>
 
     <string name="create_card">Save translate to cards</string>
 
-    <string name="language_russian" translatable="true">Russian</string>
-    <string name="language_english" translatable="true">English</string>
+    <string name="edit_card_enter_original">Enter original…</string>
+    <string name="edit_card_enter_translation">Enter translation…</string>
 
-    <string name="back" translatable="true">Back</string>
-    <string name="save" translatable="true">Save</string>
-    <string name="edit" translatable="true">Edit</string>
-    <string name="cancel" translatable="true">Cancel</string>
-    <string name="select" translatable="true">Select</string>
-    <string name="done" translatable="true">Done</string>
-
-    <string name="edit_card_enter_original">Enter original...</string>
-    <string name="edit_card_enter_translation">Enter translation...</string>
-
-    <string name="edit_pack_enter_name">Name...</string>
+    <string name="edit_pack_enter_name">Name…</string>
     <string name="edit_pack_cards_total">Cards total: %d</string>
     <string name="edit_pack_validation_err_name">Name must be not blank</string>
+
 
 </resources>

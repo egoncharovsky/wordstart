@@ -39,4 +39,6 @@ abstract class ActionModeCallback(
     fun finishActionMode() {
         mode?.finish()
     }
+
+    fun started(): Boolean = mode != null
 }
