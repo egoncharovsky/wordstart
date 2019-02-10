@@ -17,20 +17,21 @@ import ru.egoncharovsky.wordstart.ui.*
 class CardPackSelectCardsActivity : BaseActivity() {
 
     companion object {
-        val CARD_IDS = "[LearningCard.id]"
+        const val REQUEST_SELECT_CARDS = 1
+        const val CARD_IDS = "[LearningCard.id]"
     }
 
     override fun contentViewId(): Int = R.layout.card_pack_select
 
-    private val packRepo = CardPackRepository
     private val cardRepo = LearningCardRepository
 
+    private val selectedCards = mutableSetOf<Long>()
     private val mode = object : ActionModeCallback(this, R.menu.menu_select) {
         override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
             return when(item!!.itemId) {
                 R.id.action_delete -> {
                     returnResult(mapOf(
-                            CARD_IDS to selectedCards.map { it.id!! }.toLongArray()
+                            CARD_IDS to selectedCards.toLongArray()
                     ))
                     true
                 }
@@ -43,7 +44,6 @@ class CardPackSelectCardsActivity : BaseActivity() {
             finish()
         }
     }
-    private val selectedCards = mutableSetOf<LearningCard>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,10 +54,10 @@ class CardPackSelectCardsActivity : BaseActivity() {
             override fun onItemClick(view: View?, position: Int) {
                 val card = (card_pack_select_cards.adapter as CardAdapter).get(position)
 
-                if (selectedCards.contains(card))
-                    selectedCards.remove(card)
+                if (selectedCards.contains(card.id()))
+                    selectedCards.remove(card.id())
                 else
-                    selectedCards.add(card)
+                    selectedCards.add(card.id()!!)
 
                 card_pack_select_cards.adapter.notifyDataSetChanged()
             }
@@ -71,12 +71,9 @@ class CardPackSelectCardsActivity : BaseActivity() {
     override fun onStart() {
         super.onStart()
 
-        getExtra<Long>(EditCardPackActivity.CARD_PACK_ID)?.let { id ->
-            val packCards = packRepo.get(id).cards
-            selectedCards.addAll(packCards)
-        }
+        getExtra<LongArray>(CARD_IDS)?.map { selectedCards.add(it) }
 
-        val cards = cardRepo.getAll().toList().sortedByDescending { selectedCards.contains(it) }
+        val cards = cardRepo.getAll().toList().sortedByDescending { selectedCards.contains(it.id()) }
         card_pack_select_cards.adapter = CardAdapter(cards)
     }
 
@@ -101,7 +98,7 @@ class CardPackSelectCardsActivity : BaseActivity() {
             holder.subText.text = card.back.value
 
             holder.layout.setBackgroundColor(ContextCompat.getColor(this@CardPackSelectCardsActivity,
-                    when (selectedCards.contains(card)) {
+                    when (selectedCards.contains(card.id())) {
                         true -> R.color.list_item_selected_state
                         false -> R.color.list_item_normal_state
                     }))

@@ -22,8 +22,6 @@ import ru.egoncharovsky.wordstart.ui.*
 class EditCardPackActivity : BaseActivity() {
     companion object {
         const val CARD_PACK_ID: String = "cardPack.id"
-
-        const val REQUEST_SELECT_CARDS = 1
     }
 
     private val cardPackRepo = CardPackRepository
@@ -65,7 +63,9 @@ class EditCardPackActivity : BaseActivity() {
                     }
                 }
                 button_edit_pack_select_cards.setOnClickListener {
-                    requestToActivity(CardPackSelectCardsActivity::class.java, REQUEST_SELECT_CARDS, mapOf(CARD_PACK_ID to id))
+                    requestToActivity(CardPackSelectCardsActivity::class.java, CardPackSelectCardsActivity.REQUEST_SELECT_CARDS,
+                            mapOf(CardPackSelectCardsActivity.CARD_IDS to
+                                    (list_edit_pack_cards.adapter as CardAdapter).items.map { it.id()!! }.toLongArray()))
                 }
             } ?: run {
                 button_edit_pack_save.setOnClickListener {
@@ -86,7 +86,8 @@ class EditCardPackActivity : BaseActivity() {
             editStarted = true
         }
 
-        text_edit_pack_cards_total.text = resources.getString(R.string.edit_pack_cards_total, (list_edit_pack_cards.adapter as CardAdapter).items.size)
+        text_edit_pack_cards_total.text = resources.getString(R.string.edit_pack_cards_total,
+                (list_edit_pack_cards.adapter as CardAdapter).items.size)
     }
 
     override fun onDestroy() {
@@ -98,7 +99,7 @@ class EditCardPackActivity : BaseActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         when (requestCode) {
-            REQUEST_SELECT_CARDS -> when (resultCode) {
+            CardPackSelectCardsActivity.REQUEST_SELECT_CARDS -> when (resultCode) {
                 Activity.RESULT_OK -> {
                     val selectedCards = data!!.getExtra<LongArray>(CardPackSelectCardsActivity.CARD_IDS)!!.map { cardRepo.get(it) }
                     list_edit_pack_cards.adapter = CardAdapter(selectedCards)
