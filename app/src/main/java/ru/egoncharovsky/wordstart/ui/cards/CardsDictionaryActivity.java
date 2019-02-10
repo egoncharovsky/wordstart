@@ -75,12 +75,14 @@ public class CardsDictionaryActivity extends BaseActivityOld implements ModelVie
     private void activateMultiSelectMode() {
         if (actionMode == null) {
             actionMode = startSupportActionMode(actionModeCallback);
+            addButton.setVisibility(View.INVISIBLE);
         }
     }
 
     private void activateNormalMode() {
         if (actionMode != null) {
             actionMode.finish();
+            addButton.setVisibility(View.VISIBLE);
         }
     }
 

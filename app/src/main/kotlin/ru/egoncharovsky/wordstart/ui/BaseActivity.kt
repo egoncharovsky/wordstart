@@ -12,7 +12,6 @@ import kotlinx.android.synthetic.main.activity_base.*
 import ru.egoncharovsky.wordstart.R
 import ru.egoncharovsky.wordstart.ui.cards.CardsDictionaryActivity
 import ru.egoncharovsky.wordstart.ui.pack.CardPacksActivity
-import ru.egoncharovsky.wordstart.ui.pack.EditCardsPackActivity
 import ru.egoncharovsky.wordstart.ui.translate.TranslateActivity
 
 abstract class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -37,9 +36,9 @@ abstract class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationIt
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_cards_dictionary -> switchActivityTo(CardsDictionaryActivity::class.java)
-            R.id.nav_translate -> switchActivityTo(TranslateActivity::class.java)
-            R.id.nav_card_packs -> switchActivityTo(CardPacksActivity::class.java)
+            R.id.nav_cards_dictionary -> switchTo(CardsDictionaryActivity::class.java)
+            R.id.nav_translate -> switchTo(TranslateActivity::class.java)
+            R.id.nav_card_packs -> switchTo(CardPacksActivity::class.java)
         }
 
         base_drawer_layout.closeDrawer(GravityCompat.START)

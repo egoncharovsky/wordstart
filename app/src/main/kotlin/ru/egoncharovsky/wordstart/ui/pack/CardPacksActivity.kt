@@ -14,7 +14,7 @@ import ru.egoncharovsky.wordstart.repository.CardPackRepository
 import ru.egoncharovsky.wordstart.ui.ActionModeCallback
 import ru.egoncharovsky.wordstart.ui.BaseActivity
 import ru.egoncharovsky.wordstart.ui.RecyclerItemClickListener
-import ru.egoncharovsky.wordstart.ui.switchActivityTo
+import ru.egoncharovsky.wordstart.ui.switchTo
 
 class CardPacksActivity : BaseActivity() {
 
@@ -35,10 +35,16 @@ class CardPacksActivity : BaseActivity() {
             else -> false
         }
 
+        override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
+            card_packs_button_add.visibility = View.INVISIBLE
+            return super.onCreateActionMode(mode, menu)
+        }
+
         override fun onDestroyActionMode(mode: ActionMode) {
             super.onDestroyActionMode(mode)
             selected.clear()
             list_card_packs.adapter.notifyDataSetChanged()
+            card_packs_button_add.visibility = View.VISIBLE
         }
     }
 
@@ -49,7 +55,7 @@ class CardPacksActivity : BaseActivity() {
         list_card_packs.addOnItemTouchListener(object : RecyclerItemClickListener(this, list_card_packs) {
             override fun onItemClick(view: View?, position: Int) {
                 if (!mode.started()) {
-                    switchActivityTo(EditCardPackActivity::class.java, false,
+                    switchTo(EditCardPackActivity::class.java,
                             mapOf(EditCardPackActivity.CARD_PACK_ID to (list_card_packs.adapter as CardPackAdapter).get(position).id()!!))
                 } else {
                     toggleSelect(position)
@@ -63,6 +69,10 @@ class CardPacksActivity : BaseActivity() {
                 toggleSelect(position)
             }
         })
+
+        card_packs_button_add.setOnClickListener {
+            switchTo(EditCardPackActivity::class.java)
+        }
     }
 
     override fun onStart() {

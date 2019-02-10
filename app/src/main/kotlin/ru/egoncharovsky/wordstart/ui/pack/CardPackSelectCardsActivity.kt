@@ -49,7 +49,7 @@ class CardPackSelectCardsActivity : BaseActivity() {
 
         card_pack_select_cards.addOnItemTouchListener(object : RecyclerItemClickListener(this, card_pack_select_cards) {
             override fun onItemClick(view: View?, position: Int) {
-                val card = (card_pack_select_cards.adapter as CardAdapter).get(position)
+                val card = cards()[position]
 
                 if (selectedCards.contains(card.id()))
                     selectedCards.remove(card.id())
@@ -73,6 +73,8 @@ class CardPackSelectCardsActivity : BaseActivity() {
         val cards = cardRepo.getAll().toList().sortedByDescending { selectedCards.contains(it.id()) }
         card_pack_select_cards.adapter = CardAdapter(cards)
     }
+
+    private fun cards(): List<LearningCard> = (card_pack_select_cards.adapter as? CardAdapter)?.items ?: listOf()
 
     inner class CardAdapter(val items: List<LearningCard>) : RecyclerView.Adapter<CardAdapter.LearningCardView>() {
 

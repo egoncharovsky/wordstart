@@ -57,15 +57,15 @@ class EditCardPackActivity : BaseActivity() {
                         cardPackRepo.update(CardPack(
                                 cardPack.id,
                                 input_edit_pack_name.input(),
-                                (list_edit_pack_cards.adapter as CardAdapter).items.toSet()
+                                cards().toSet()
                         ))
                         finish()
                     }
                 }
                 button_edit_pack_select_cards.setOnClickListener {
-                    requestToActivity(CardPackSelectCardsActivity::class.java, CardPackSelectCardsActivity.REQUEST_SELECT_CARDS,
+                    requestTo(CardPackSelectCardsActivity::class.java, CardPackSelectCardsActivity.REQUEST_SELECT_CARDS,
                             mapOf(CardPackSelectCardsActivity.CARD_IDS to
-                                    (list_edit_pack_cards.adapter as CardAdapter).items.map { it.id()!! }.toLongArray()))
+                                    cards().map { it.id()!! }.toLongArray()))
                 }
             } ?: run {
                 button_edit_pack_save.setOnClickListener {
@@ -73,21 +73,20 @@ class EditCardPackActivity : BaseActivity() {
                         cardPackRepo.create(CardPack(
                                 null,
                                 input_edit_pack_name.input(),
-                                (list_edit_pack_cards.adapter as CardAdapter).items.toSet()
+                                cards().toSet()
                         ))
                         finish()
                     }
                 }
 
                 button_edit_pack_select_cards.setOnClickListener {
-                    switchActivityTo(CardPackSelectCardsActivity::class.java)
+                    requestTo(CardPackSelectCardsActivity::class.java, CardPackSelectCardsActivity.REQUEST_SELECT_CARDS)
                 }
             }
             editStarted = true
         }
 
-        text_edit_pack_cards_total.text = resources.getString(R.string.edit_pack_cards_total,
-                (list_edit_pack_cards.adapter as CardAdapter).items.size)
+        text_edit_pack_cards_total.text = resources.getString(R.string.edit_pack_cards_total, cards().size)
     }
 
     override fun onDestroy() {
@@ -107,6 +106,8 @@ class EditCardPackActivity : BaseActivity() {
             }
         }
     }
+
+    private fun cards(): List<LearningCard> = (list_edit_pack_cards.adapter as? CardAdapter)?.items ?: listOf()
 
     class CardAdapter(val items: List<LearningCard>) : RecyclerView.Adapter<CardAdapter.LearningCardView>() {
 
